@@ -1,37 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Object Detection · MarketPulse AI</title>
-<link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+
+<title>Object Detection | MarketPulse AI</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='style.css') }}">
+
 </head>
+
 <body>
+
 <div class="navbar">
-  <a class="brand" href="index.html">📈 MarketPulse AI</a>
-  <div class="nav-links">
-    html">General</a>
-    <a class="nav-btn" href="comparison.html">Comparison</a>
-    <a class="nav-btn" href="agent.html">Agent</a>
-  </div>
+
+    <a class="brand" href="/">
+        📈 MarketPulse AI
+    </a>
+
 </div>
+
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">🎯  Object Detection</h1>
-<p class="page-subtitle">Endpoint: POST /detect-object  •  Use case: Locate objects in image</p>
-<div class="card">
-  <div class="section-title">Input</div>
-  <div class="form-group"><label class="form-label">image</label><input type="file" class="form-input" id="in-image" accept="image/*"></div>
-  <button class="submit-btn" onclick="runModel()">Predict</button>
+
+    <a class="back-btn" href="/">
+        ← Back to Dashboard
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🎯 Object Detection</h1>
+
+        <p>
+
+            Upload an image to detect and count objects using a
+            computer vision model. The detected image and object
+            summary will be displayed below.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About Object Detection
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Object Detection identifies multiple objects in an image,
+            predicts their locations, and counts the detected classes.
+
+        </p>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📤 Upload Image
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Select Image
+
+            </label>
+
+            <input
+                type="file"
+                id="in-image"
+                class="form-input"
+                accept="image/*">
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            🎯 Detect Objects
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📊 Detection Result
+
+        </div>
+
+        <div
+            id="model-output"
+            class="output-card">
+
+            Upload an image and click
+            <strong>Detect Objects</strong>
+            to view the detection results.
+
+        </div>
+
+    </div>
+
+    <!-- Model Information -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🧠 Model Information
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">🎯</span>
+
+                Task
+
+                <span class="file-tag">
+
+                    Object Detection
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">🖼️</span>
+
+                Input
+
+                <span class="file-tag">
+
+                    Image
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📦</span>
+
+                Output
+
+                <span class="file-tag">
+
+                    Objects
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📈</span>
+
+                Result
+
+                <span class="file-tag">
+
+                    Count
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
 </div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+
 <script>
+
 const ENDPOINT = "/detect-object";
 
 async function runModel(){
+
   const out = document.getElementById("model-output");
   const fileInput = document.getElementById("in-image");
 
@@ -40,52 +209,88 @@ async function runModel(){
     return;
   }
 
-  out.textContent = "⏳ Sending request to " + ENDPOINT + " …";
+  out.innerHTML = "⏳ Detecting objects...";
 
   const formData = new FormData();
   formData.append("image", fileInput.files[0]);
 
   try {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      body: formData
+
+    const res = await fetch(ENDPOINT,{
+      method:"POST",
+      body:formData
     });
 
     const json = await res.json();
 
     if(json.status !== "success"){
-      out.textContent = "❌ Error: " + (json.message || "Detection failed.");
+
+      out.innerHTML =
+      "<span style='color:red'>❌ " +
+      (json.message || "Detection failed.") +
+      "</span>";
+
       return;
     }
 
-    // build a small table of object counts
     let rows = "";
+
     const counts = json.object_counts || {};
+
     const names = Object.keys(counts);
 
-    if(names.length === 0){
-      rows = "<tr><td colspan='2'>No objects detected.</td></tr>";
-    } else {
+    if(names.length===0){
+
+      rows =
+      "<tr><td colspan='2'>No objects detected.</td></tr>";
+
+    }else{
+
       for(const name of names){
-        rows += "<tr><td>" + name + "</td><td>" + counts[name] + "</td></tr>";
+
+        rows +=
+        "<tr><td>"+name+"</td><td>"+counts[name]+"</td></tr>";
+
       }
+
     }
 
     out.innerHTML =
-      "<p><b>Image:</b> " + json.image_name + "</p>" +
-      "<p><b>Total Objects:</b> " + json.total_objects + "</p>" +
-      "<table class='result-table'>" +
-        "<tr><th>Object</th><th>Count</th></tr>" +
-        rows +
-      "</table>" +
-      "<img src='" + json.image_url + "' alt='Detected image' " +
-        "style='width:100%; max-width:500px; height:auto; margin-top:12px; border-radius:8px; display:block;'>";
 
-  } catch(err) {
-    out.textContent = "❌ Error: " + err.message;
+    "<div class='result-header'>" +
+
+    "<b>Status:</b> <span class='status-ok'>✅ Success</span><br>" +
+
+    "<b>Image:</b> "+json.image_name+"<br>" +
+
+    "<b>Total Objects:</b> "+json.total_objects+
+
+    "</div>"+
+
+    "<table class='pred-table'>"+
+
+    "<tr><th>Object</th><th>Count</th></tr>"+
+
+    rows+
+
+    "</table>"+
+
+    "<img src='"+json.image_url+"' style='width:100%;max-width:550px;margin-top:20px;border-radius:12px;'>";
+
   }
+
+  catch(err){
+
+    out.innerHTML =
+    "<span style='color:red'>❌ "+
+    err.message+
+    "</span>";
+
+  }
+
 }
+
 </script>
-</div>
+
 </body>
 </html>

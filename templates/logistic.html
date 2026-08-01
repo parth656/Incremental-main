@@ -1,65 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sentiment (Logistic) · MarketPulse AI</title>
-<link rel="stylesheet"  href="{{ url_for('static', path='style.css') }}">
+
+<title>Logistic Regression Sentiment | MarketPulse AI</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='style.css') }}">
+
 </head>
+
 <body>
+
 <div class="navbar">
-  <a class="brand" href="index.html">📈 MarketPulse AI</a>
-  <div class="nav-links">
-    <a class="nav-btn active" href="index.html">General</a>
-    <a class="nav-btn" href="comparison.html">Comparison</a>
-    <a class="nav-btn" href="agent.html">Agent</a>
-  </div>
+
+    <a class="brand" href="/">
+        📈 MarketPulse AI
+    </a>
+
 </div>
+
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">💬  Sentiment (Logistic)</h1>
-<p class="page-subtitle">Endpoint: POST /sentiment-logistic  •  Use case: Fast sentiment</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">text</label><textarea class="form-textarea" id="in-text"></textarea></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
+
+    <a class="back-btn" href="/">
+        ← Back to Dashboard
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>💬 Logistic Regression Sentiment Analysis</h1>
+
+        <p>
+
+            Analyze customer reviews or text using a Logistic
+            Regression model to predict whether the sentiment is
+            positive or negative.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About This Model
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Logistic Regression is a lightweight supervised machine
+            learning algorithm widely used for binary text
+            classification and sentiment analysis.
+
+        </p>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📝 Text Input
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Enter Review
+
+            </label>
+
+            <textarea
+                id="in-text"
+                class="form-textarea"
+                placeholder="Example: This product exceeded my expectations.">
+            </textarea>
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            💬 Analyze Sentiment
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📊 Prediction Result
+
+        </div>
+
+        <div
+            id="model-output"
+            class="output-card">
+
+            Prediction will appear here.
+
+        </div>
+
+    </div>
+
+    <!-- Model Information -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🧠 Model Information
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                Algorithm
+
+                <span class="file-tag">
+
+                    Logistic Regression
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📝</span>
+
+                Input
+
+                <span class="file-tag">
+
+                    Text
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">😊</span>
+
+                Output
+
+                <span class="file-tag">
+
+                    Sentiment
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">⚡</span>
+
+                Task
+
+                <span class="file-tag">
+
+                    Classification
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
 </div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+
 <script>
-const ENDPOINT = "/sentiment-logistic";
-const INPUTS = [{"n": "text", "t": "textarea"}];
-const SAMPLE_OUTPUT = {
-  "sentiment": "Positive | Negative",
-  "confidence": "number"
+
+const ENDPOINT="/sentiment-logistic";
+
+const INPUTS=[
+    {
+        n:"text",
+        t:"textarea"
+    }
+];
+
+const SAMPLE_OUTPUT={
+    sentiment:"Positive | Negative",
+    confidence:"number"
 };
+
 async function runModel(){
-  const out = document.getElementById("model-output");
-  out.textContent = "⏳ Sending request to " + ENDPOINT + " …";
-  const data = {};
-  INPUTS.forEach(inp => {
-    const el = document.getElementById("in-" + inp.n);
-    data[inp.n] = inp.t === "file" ? (el.files[0]?.name || "") : el.value;
-  });
-  /* ---- REAL BACKEND CALL (uncomment when ready) ----
-  try {
-    const res = await fetch(ENDPOINT, {
-      method:"POST", headers:{"Content-Type":"application/json"},
-      body: JSON.stringify(data)
+
+    const out=document.getElementById("model-output");
+
+    out.textContent="⏳ Sending request...";
+
+    const data={};
+
+    INPUTS.forEach(inp=>{
+
+        const el=document.getElementById("in-"+inp.n);
+
+        data[inp.n]=el.value;
+
     });
-    const json = await res.json();
-    out.textContent = JSON.stringify(json, null, 2);
-  } catch(err) { out.textContent = "❌ Error: " + err.message; }
-  -------------------------------------------------- */
-  setTimeout(() => {
-    out.textContent =
-      "REQUEST:\n" + JSON.stringify(data, null, 2) +
-      "\n\nRESPONSE (sample):\n" + JSON.stringify(SAMPLE_OUTPUT, null, 2);
-  }, 500);
+
+    /*
+    Uncomment when backend is ready.
+
+    try{
+
+        const res=await fetch(ENDPOINT,{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(data)
+
+        });
+
+        const json=await res.json();
+
+        out.innerHTML=`
+        <div class="result-header">
+
+        <strong>Prediction Completed</strong>
+
+        </div>
+
+        <table class="pred-table">
+
+        <tr>
+
+        <th>Field</th>
+
+        <th>Value</th>
+
+        </tr>
+
+        <tr>
+
+        <td>Sentiment</td>
+
+        <td>${json.sentiment}</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Confidence</td>
+
+        <td>${json.confidence}</td>
+
+        </tr>
+
+        </table>`;
+
+    }
+
+    catch(err){
+
+        out.textContent="❌ "+err.message;
+
+    }
+
+    */
+
+    setTimeout(()=>{
+
+        out.innerHTML=`
+
+        <div class="result-header">
+
+        <strong>Demo Prediction</strong>
+
+        </div>
+
+        <table class="pred-table">
+
+        <tr>
+
+        <th>Field</th>
+
+        <th>Value</th>
+
+        </tr>
+
+        <tr>
+
+        <td>Sentiment</td>
+
+        <td>${SAMPLE_OUTPUT.sentiment}</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Confidence</td>
+
+        <td>${SAMPLE_OUTPUT.confidence}</td>
+
+        </tr>
+
+        </table>
+
+        `;
+
+    },500);
+
 }
+
 </script>
-</div>
+
 </body>
+
 </html>

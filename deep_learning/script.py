@@ -53,8 +53,8 @@ if __name__ == "__main__":
         print(predict_cnn(sys.argv[2]))
     elif cmd == "tl":
         print(predict_tl(sys.argv[2]))
-    elif cmd == "predict":
-        print(predict_both(sys.argv[2]))
+    # elif cmd == "predict":
+    #     print(predict_both(sys.argv[2]))
     else:
         run_training()
         run_eval()

@@ -69,7 +69,7 @@ class Evaluator:
             "confusion_matrix": confusion_matrix(y_true, y_pred).tolist(),
         }
 
-    def compare(self, test_ds):
+    # def compare(self, test_ds):
         os.makedirs(ARTIFACTS, exist_ok=True)
 
         results = {}

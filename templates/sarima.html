@@ -1,152 +1,555 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forecast with SARIMA · MarketPulse AI</title>
+
+<title>SARIMA Forecast | MarketPulse AI</title>
+
 <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
+
 <body>
+
 <div class="navbar">
-  <a class="brand" href="index.html">📈 MarketPulse AI</a>
-  <div class="nav-links">
-    <a class="nav-btn active" href="index.html">General</a>
-    <a class="nav-btn" href="comparison.html">Comparison</a>
-    <a class="nav-btn" href="agent.html">Agent</a>
-  </div>
+
+    <a class="brand" href="/">
+        📈 MarketPulse AI
+    </a>
+
 </div>
+
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">📉  Forecast with SARIMA</h1>
-<p class="page-subtitle">Endpoint: POST /forecast-sarima  •  Use case: Seasonal forecast</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">product_id</label><input type="text" class="form-input" id="in-product_id"></div>
-      <div class="form-group"><label class="form-label">days</label><input type="number" class="form-input" id="in-days"></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
+
+    <a class="back-btn" href="/">
+        ← Back to Dashboard
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>📉 SARIMA Forecasting</h1>
+
+        <p>
+
+            Forecast future sales using the Seasonal AutoRegressive
+            Integrated Moving Average (SARIMA) model. Generate
+            accurate forecasts by considering seasonal trends.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About SARIMA
+
+        </div>
+
+        <p class="page-subtitle">
+
+            SARIMA extends the ARIMA model by incorporating seasonal
+            components, making it suitable for forecasting data with
+            repeating seasonal patterns.
+
+        </p>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📥 Forecast Input
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Product ID
+
+            </label>
+
+            <input
+                id="in-product_id"
+                type="text"
+                class="form-input"
+                placeholder="Enter Product ID">
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Forecast Horizon (Days)
+
+            </label>
+
+            <input
+                id="in-days"
+                type="number"
+                class="form-input"
+                placeholder="Example: 7">
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            📉 Generate Forecast
+
+        </button>
+
+    </div>
+        <!-- Forecast Result -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📊 Forecast Result
+
+        </div>
+
+        <div
+            id="model-output"
+            class="output-card">
+
+            Forecast results will appear here after prediction.
+
+        </div>
+
+        <canvas
+            id="forecast-chart"
+            style="display:none;margin-top:20px;">
+        </canvas>
+
+    </div>
+
+    <!-- Model Artifacts -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📦 Model Artifacts
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                sarima_model.pkl
+
+                <span class="file-tag">
+
+                    Model
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">⚙️</span>
+
+                seasonality_config.json
+
+                <span class="file-tag">
+
+                    Config
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📈</span>
+
+                forecast_plot.png
+
+                <span class="file-tag">
+
+                    Forecast
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📊</span>
+
+                metrics.json
+
+                <span class="file-tag">
+
+                    Metrics
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📜</span>
+
+                training_log.txt
+
+                <span class="file-tag">
+
+                    Log
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Model Information -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🧠 Model Information
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">📌</span>
+
+                Algorithm
+
+                <span class="file-tag">
+
+                    SARIMA
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📥</span>
+
+                Input
+
+                <span class="file-tag">
+
+                    Product ID
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📅</span>
+
+                Forecast Horizon
+
+                <span class="file-tag">
+
+                    Days
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📤</span>
+
+                Output
+
+                <span class="file-tag">
+
+                    Sales Forecast
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
 </div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-  <canvas id="forecast-chart" style="display:none; margin-top:16px;"></canvas>
-</div>
-<div class="card">
-  <div class="section-title">📦 SARIMA Artifacts</div>
-  <ul class="artifact-list">
-    <li><span class="file-icon">📄</span>sarima_model.pkl<span class="file-tag">model</span></li>
-    <li><span class="file-icon">📄</span>seasonality_config.json<span class="file-tag">config</span></li>
-    <li><span class="file-icon">📄</span>forecast_plot.png<span class="file-tag">plot</span></li>
-    <li><span class="file-icon">📄</span>metrics.json<span class="file-tag">metrics</span></li>
-    <li><span class="file-icon">📄</span>training_log.txt<span class="file-tag">log</span></li>
-  </ul>
-</div>
+
 <script>
+
 const ENDPOINT = "/forecast-sarima";
 
-// keep one chart object so we can destroy it before drawing a new one
 let chart = null;
 
 async function runModel() {
-    const out = document.getElementById("model-output");
+
+    const out =
+        document.getElementById("model-output");
 
     const data = {
-        product_id: document.getElementById("in-product_id").value,
-        days: Number(document.getElementById("in-days").value)
+
+        product_id:
+        document.getElementById("in-product_id").value,
+
+        days:
+        Number(document.getElementById("in-days").value)
+
     };
 
-    out.innerHTML = "⏳ Predicting...";
+    out.innerHTML = "⏳ Generating Forecast...";
 
     try {
-        const response = await fetch(ENDPOINT, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
+
+        const response = await fetch(
+
+            ENDPOINT,
+
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "Content-Type":
+                    "application/json"
+
+                },
+
+                body: JSON.stringify(data)
+
+            }
+
+        );
 
         if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
+
+            throw new Error(
+                `HTTP ${response.status}`
+            );
+
         }
 
-        const result = await response.json();
+        const result =
+            await response.json();
+
         showResult(result);
 
-    } catch (error) {
+    }
+
+    catch (error) {
+
         out.innerHTML =
             "<span style='color:red'>❌ " +
             error.message +
             "</span>";
+
     }
+
 }
 
-// build header text + draw the chart
 function showResult(result) {
-    const out = document.getElementById("model-output");
 
-    // the actual data is nested inside prediction.data
-    const info = result.prediction.data;
-    const sales = info.predicted_sales;
+    const out =
+        document.getElementById("model-output");
 
-    // header with product details
-    let html = "<div class='result-header'>";
-    html += "Status: <span class='status-ok'>✅ " + result.prediction.status + "</span><br>";
-    html += "Method: <b>" + result.method.toUpperCase() + "</b><br>";
-    html += "Product ID: <b>" + info.product_id + "</b><br>";
-    html += "Product Name: <b>" + info.product_name + "</b><br>";
-    html += "Horizon: <b>" + info.horizon_days + " days</b>";
-    html += "</div>";
+    const info =
+        result.prediction.data;
+
+    const sales =
+        info.predicted_sales;
+
+    let html =
+        "<div class='result-header'>";
+
+    html +=
+        "<strong>✅ Forecast Completed</strong><br>";
+
+    html +=
+        "Method: <b>" +
+        result.method.toUpperCase() +
+        "</b><br>";
+
+    html +=
+        "Product ID: <b>" +
+        info.product_id +
+        "</b><br>";
+
+    html +=
+        "Product Name: <b>" +
+        info.product_name +
+        "</b><br>";
+
+    html +=
+        "Forecast Days: <b>" +
+        info.horizon_days +
+        "</b>";
+
+    html +=
+        "</div>";
+
+    html +=
+        "<table class='pred-table'>";
+
+    html +=
+        "<tr><th>Day</th><th>Predicted Sales</th></tr>";
+
+    for(let i=0;i<sales.length;i++){
+
+        html +=
+        "<tr><td>Day "+(i+1)+
+        "</td><td>"+sales[i]+
+        "</td></tr>";
+
+    }
+
+    html +=
+        "</table>";
 
     out.innerHTML = html;
 
-    // draw the bar chart
     drawChart(sales);
-}
 
-// draw predicted sales as a bar chart (histogram style)
-function drawChart(sales) {
-    const canvas = document.getElementById("forecast-chart");
+}function drawChart(sales) {
+
+    const canvas =
+        document.getElementById("forecast-chart");
+
     canvas.style.display = "block";
 
-    // make labels: Day 1, Day 2, ...
     const labels = [];
-    for (let i = 0; i < sales.length; i++) {
+
+    for(let i = 0; i < sales.length; i++){
+
         labels.push("Day " + (i + 1));
+
     }
 
-    // remove old chart before drawing new one
-    if (chart !== null) {
+    if(chart){
+
         chart.destroy();
+
     }
 
     chart = new Chart(canvas, {
+
         type: "bar",
+
         data: {
+
             labels: labels,
-            datasets: [{
-                label: "Predicted Sales",
-                data: sales,
-                backgroundColor: "#4f8cff",
-                borderRadius: 6,
-                barPercentage: 0.9,
-                categoryPercentage: 0.95
-            }]
+
+            datasets: [
+
+                {
+
+                    label: "Predicted Sales",
+
+                    data: sales,
+
+                    backgroundColor: "#4f46e5",
+
+                    borderRadius: 8,
+
+                    borderSkipped: false,
+
+                    barPercentage: 0.85,
+
+                    categoryPercentage: 0.9
+
+                }
+
+            ]
+
         },
+
         options: {
+
             responsive: true,
+
+            maintainAspectRatio: false,
+
             plugins: {
-                legend: { display: true },
-                title: { display: true, text: "Day-wise Predicted Sales" }
+
+                legend: {
+
+                    display: true
+
+                },
+
+                title: {
+
+                    display: true,
+
+                    text: "Day-wise Sales Forecast"
+
+                }
+
             },
+
             scales: {
-                y: { beginAtZero: true, title: { display: true, text: "Sales" } },
-                x: { title: { display: true, text: "Day" } }
+
+                y: {
+
+                    beginAtZero: true,
+
+                    title: {
+
+                        display: true,
+
+                        text: "Predicted Sales"
+
+                    }
+
+                },
+
+                x: {
+
+                    title: {
+
+                        display: true,
+
+                        text: "Forecast Days"
+
+                    }
+
+                }
+
             }
+
         }
+
     });
+
 }
+
 </script>
-</div>
+
 </body>
+
 </html>

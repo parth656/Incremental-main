@@ -2,211 +2,360 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<title>LangGraph Agent | MarketPulse AI</title>
 
-    <title>LangGraph · MarketPulse AI</title>
+<link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
 
-    <link rel="stylesheet"  href="{{ url_for('static', path='style.css') }}">
 </head>
 
 <body>
 
-    <div class="navbar">
+<div class="navbar">
 
-        <a class="brand" href="/">
-            📈 MarketPulse AI
-        </a>
+    <a class="brand" href="/">
+        📈 MarketPulse AI
+    </a>
 
-        <div class="nav-links">
+</div>
 
-            <a class="nav-btn" href="/">
-                General
-            </a>
+<div class="container">
 
-            <a class="nav-btn" href="/">
-                Comparison
-            </a>
+    <a class="back-btn" href="/">
+        ← Back to Dashboard
+    </a>
 
-            <a class="nav-btn active" href="/">
-                Agent
-            </a>
+    <!-- Hero -->
 
-        </div>
+    <div class="hero">
+
+        <h1>🕸️ LangGraph Agent</h1>
+
+        <p>
+
+            Chat with a LangGraph-powered AI assistant that maintains
+            conversation state and executes multi-step workflows for
+            complex reasoning tasks.
+
+        </p>
 
     </div>
 
+    <!-- About -->
 
-    <div class="container">
+    <div class="card">
 
-        <a class="back-btn" href="/">
-            ← Back to Agents
-        </a>
+        <div class="section-title">
 
-        <h1 class="page-title">
-            🕸️ LangGraph
-        </h1>
+            ℹ️ About LangGraph
+
+        </div>
 
         <p class="page-subtitle">
-            Endpoint: POST /chatbot-response • Stateful multi-step LangGraph agent
+
+            LangGraph extends Large Language Models by representing
+            conversations as graphs, enabling state management,
+            workflow execution, and intelligent decision making.
+
         </p>
 
+    </div>
+
+    <!-- Features -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🚀 Capabilities
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+                <span class="file-icon">🧠</span>
+                Stateful Conversations
+                <span class="file-tag">Memory</span>
+            </li>
+
+            <li>
+                <span class="file-icon">⚙️</span>
+                Multi-Step Workflow
+                <span class="file-tag">Graph</span>
+            </li>
+
+            <li>
+                <span class="file-icon">💬</span>
+                AI Chat
+                <span class="file-tag">LLM</span>
+            </li>
+
+            <li>
+                <span class="file-icon">🔄</span>
+                Context Tracking
+                <span class="file-tag">Agent</span>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Chat -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            💬 Chat Interface
+
+        </div>
 
         <div class="chat-window" id="chat-window">
 
             <div class="chat-bubble bot-msg">
-                🕸️ LangGraph ready. Ask me anything 🚀
+
+                🕸️ LangGraph Agent is ready.
+                Ask your question!
+
             </div>
 
         </div>
-
 
         <div class="chat-input-row">
 
             <input
                 type="text"
                 id="chat-input"
-                placeholder="Type your message..."
-                autocomplete="off"
-            >
+                placeholder="Ask something..."
+                autocomplete="off">
 
             <button
-                type="button"
                 id="send-button"
-                onclick="sendChat()"
-            >
+                type="button"
+                onclick="sendChat()">
+
                 Send
+
             </button>
 
         </div>
 
     </div>
 
+    <!-- Example Prompts -->
 
-    <script>
-        const ENDPOINT = "/chatbot-response";
-        const history = [];
+    <div class="card">
 
-        const chatInput = document.getElementById("chat-input");
-        const sendButton = document.getElementById("send-button");
+        <div class="section-title">
 
+            💡 Example Questions
 
-        chatInput.addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                sendChat();
-            }
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+                Explain LangGraph in simple terms.
+            </li>
+
+            <li>
+                How does graph-based AI work?
+            </li>
+
+            <li>
+                Compare LangGraph and LangChain.
+            </li>
+
+            <li>
+                Plan a multi-agent workflow.
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+<script>
+
+const ENDPOINT = "/chatbot-response";
+const history = [];
+
+const chatInput = document.getElementById("chat-input");
+const sendButton = document.getElementById("send-button");
+
+chatInput.addEventListener("keydown",function(event){
+
+    if(event.key==="Enter"){
+
+        sendChat();
+
+    }
+
+});
+
+function render(){
+
+    const chatWindow=document.getElementById("chat-window");
+
+    if(history.length===0){
+
+        chatWindow.innerHTML=`
+        <div class="chat-bubble bot-msg">
+            🕸️ LangGraph Agent is ready. Ask your question!
+        </div>`;
+
+    }else{
+
+        chatWindow.innerHTML="";
+
+        history.forEach(function(item){
+
+            const bubble=document.createElement("div");
+
+            bubble.className=
+            "chat-bubble "+item.role+"-msg";
+
+            bubble.textContent=item.text;
+
+            chatWindow.appendChild(bubble);
+
         });
 
+    }
 
-        function render() {
-            const chatWindow = document.getElementById("chat-window");
+    chatWindow.scrollTop=chatWindow.scrollHeight;
 
-            if (history.length === 0) {
-                chatWindow.innerHTML =
-                    '<div class="chat-bubble bot-msg">' +
-                    '🕸️ LangGraph ready. Ask me anything 🚀' +
-                    '</div>';
-            } else {
-                chatWindow.innerHTML = "";
+}
 
-                history.forEach(function(item) {
-                    const bubble = document.createElement("div");
+async function sendChat(){
 
-                    bubble.className =
-                        "chat-bubble " + item.role + "-msg";
+    const message=chatInput.value.trim();
 
-                    bubble.textContent = item.text;
+    if(!message){
 
-                    chatWindow.appendChild(bubble);
-                });
-            }
+        return;
 
-            chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    history.push({
+
+        role:"user",
+
+        text:message
+
+    });
+
+    render();
+
+    chatInput.value="";
+
+    chatInput.disabled=true;
+
+    sendButton.disabled=true;
+
+    sendButton.textContent="Thinking...";
+
+    try{
+
+        const response=await fetch(ENDPOINT,{
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify({
+
+                question:message
+
+            })
+
+        });
+
+        const data=await response.json();
+
+        if(!response.ok){
+
+            throw new Error(
+
+                data.detail ||
+
+                "Unable to get response"
+
+            );
+
         }
 
+        let reply=data.answer||
 
-        async function sendChat() {
-            const message = chatInput.value.trim();
+        "No answer received.";
 
-            if (!message) {
-                return;
-            }
+        if(data.approved!==undefined){
 
-            history.push({
-                role: "user",
-                text: message
+            reply+="\n\nApproved: "+
+
+            (data.approved?"Yes":"No");
+
+        }
+
+        if(data.issues&&data.issues.length>0){
+
+            reply+="\n\nIssues Found:";
+
+            data.issues.forEach(function(issue){
+
+                reply+="\n- "+issue;
+
             });
 
-            render();
-
-            chatInput.value = "";
-            chatInput.disabled = true;
-            sendButton.disabled = true;
-            sendButton.textContent = "Thinking...";
-
-            try {
-                const response = await fetch(ENDPOINT, {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        question: message
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(
-                        data.detail || "Unable to get response"
-                    );
-                }
-
-                let reply = data.answer || "No answer received.";
-
-                if (data.approved !== undefined) {
-                    reply += "\n\nApproved: " +
-                        (data.approved ? "Yes" : "No");
-                }
-
-                if (data.issues && data.issues.length > 0) {
-                    reply += "\n\nIssues Found:";
-
-                    data.issues.forEach(function(issue) {
-                        reply += "\n- " + issue;
-                    });
-                }
-
-                history.push({
-                    role: "bot",
-                    text: reply
-                });
-
-            } catch (error) {
-                history.push({
-                    role: "bot",
-                    text: "Error: " + error.message
-                });
-
-            } finally {
-                render();
-
-                chatInput.disabled = false;
-                sendButton.disabled = false;
-                sendButton.textContent = "Send";
-
-                chatInput.focus();
-            }
         }
-    </script>
+
+        history.push({
+
+            role:"bot",
+
+            text:reply
+
+        });
+
+    }
+
+    catch(error){
+
+        history.push({
+
+            role:"bot",
+
+            text:"❌ Error: "+error.message
+
+        });
+
+    }
+
+    finally{
+
+        render();
+
+        chatInput.disabled=false;
+
+        sendButton.disabled=false;
+
+        sendButton.textContent="Send";
+
+        chatInput.focus();
+
+    }
+
+}
+
+</script>
 
 </body>
-
 </html>

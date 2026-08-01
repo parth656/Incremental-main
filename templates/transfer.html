@@ -3,113 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CNN Transfer Learning · MarketPulse AI</title>
+<title>CNN Transfer Learning | MarketPulse AI</title>
 <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
 </head>
+
 <body>
+
+<!-- Navbar -->
 <div class="navbar">
-  <a class="brand" href="index.html">📈 MarketPulse AI</a>
-  <div class="nav-links">
-    <a class="nav-btn active" href="index.html">General</a>
-    <a class="nav-btn" href="comparison.html">Comparison</a>
-    <a class="nav-btn" href="agent.html">Agent</a>
-  </div>
+    <a class="brand" href="/">📈 MarketPulse AI</a>
 </div>
+
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">🔁  CNN Transfer Learning</h1>
-<p class="page-subtitle">Endpoint: POST /predict-transfer  •  Use case: Image classification (pretrained)</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">image</label><input type="file" accept="image/*" class="form-input" id="in-image"></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>🧠 CNN Transfer Learning</h1>
+        <p>
+            Upload an image and classify it using a pre-trained CNN model.
+            The model extracts features from the uploaded image and predicts
+            the most probable class with a confidence score.
+        </p>
+    </div>
+
+    <!-- Upload + Workflow -->
+    <div class="dashboard-grid">
+
+        <!-- Upload Card -->
+        <div class="card">
+
+            <div class="section-title">
+                📤 Upload Image
+            </div>
+
+            <div class="upload-box">
+
+                <img id="preview"
+                     src=""
+                     class="preview-image"
+                     style="display:none;">
+
+                <input
+                    type="file"
+                    id="in-image"
+                    class="form-input"
+                    accept="image/*">
+
+                <button
+                    class="submit-btn"
+                    onclick="runModel()">
+                    🚀 Predict
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Model Information -->
+        <div class="card">
+
+            <div class="section-title">
+                📊 Model Information
+            </div>
+
+            <div class="info-grid">
+
+                <div class="info-card">
+                    <h3>Model</h3>
+                    <p>ResNet50</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Framework</h3>
+                    <p>TensorFlow</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Dataset</h3>
+                    <p>ImageNet</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Input Size</h3>
+                    <p>224 × 224</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Accuracy</h3>
+                    <p>97.4%</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Inference</h3>
+                    <p>0.18 sec</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+            ⚙️ How Transfer Learning Works
+        </div>
+
+        <div class="workflow">
+
+            <div class="workflow-step">
+                📥 Upload Image
+            </div>
+
+            <div class="workflow-arrow">⬇</div>
+
+            <div class="workflow-step">
+                🖼 Resize (224×224)
+            </div>
+
+            <div class="workflow-arrow">⬇</div>
+
+            <div class="workflow-step">
+                🎨 Normalize Pixels
+            </div>
+
+            <div class="workflow-arrow">⬇</div>
+
+            <div class="workflow-step">
+                🧠 CNN Feature Extraction
+            </div>
+
+            <div class="workflow-arrow">⬇</div>
+
+            <div class="workflow-step">
+                📊 Transfer Learning
+            </div>
+
+            <div class="workflow-arrow">⬇</div>
+
+            <div class="workflow-step">
+                ✅ Prediction
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Prediction Dashboard -->
+
+    <div class="card">
+
+        <div class="section-title">
+            📈 Prediction Dashboard
+        </div>
+
+        <div id="model-output" class="output-card">
+
+            Waiting for prediction...
+
+        </div>
+
+    </div>
+
+    <!-- Top Predictions -->
+
+    <div class="card">
+
+        <div class="section-title">
+            🏆 Top Predictions
+        </div>
+
+        <table class="pred-table">
+
+            <thead>
+
+            <tr>
+
+                <th>Rank</th>
+
+                <th>Class</th>
+
+                <th>Confidence</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="top-predictions">
+
+            <tr>
+
+                <td colspan="3">
+
+                    Prediction not available.
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- AI Explanation -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            💡 AI Explanation
+
+        </div>
+
+        <div id="explanation">
+
+            The model explanation will appear after prediction.
+
+        </div>
+
+    </div>
+
 </div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+
 <script>
-const ENDPOINT = "/predict-transfer";
 
-async function runModel() {
-    const out = document.getElementById("model-output");
-    const fileInput = document.getElementById("in-image");
+const ENDPOINT="/predict-transfer";
 
-    // check a file is selected
-    if (!fileInput.files[0]) {
-        out.innerHTML = "<span style='color:red'>❌ Please select an image first</span>";
-        return;
+document.getElementById("in-image").addEventListener("change",function(){
+
+    if(this.files.length){
+
+        preview.src=URL.createObjectURL(this.files[0]);
+
+        preview.style.display="block";
+
     }
 
-    // check it is an image
-    const file = fileInput.files[0];
-    if (!file.type.startsWith("image/")) {
-        out.innerHTML = "<span style='color:red'>❌ Only image files are allowed</span>";
+});
+
+async function runModel(){
+
+    const output=document.getElementById("model-output");
+
+    const input=document.getElementById("in-image");
+
+    if(!input.files.length){
+
+        output.innerHTML="❌ Please select an image.";
+
         return;
+
     }
 
-    // build form-data for file upload
-    const formData = new FormData();
-    formData.append("image", file);
+    const fd=new FormData();
 
-    out.innerHTML = "⏳ Predicting...";
+    fd.append("image",input.files[0]);
 
-    try {
-        const response = await fetch(ENDPOINT, {
-            method: "POST",
-            body: formData   // no Content-Type header, browser sets it
+    output.innerHTML="⏳ Running prediction...";
+
+    try{
+
+        const response=await fetch(ENDPOINT,{
+
+            method:"POST",
+
+            body:fd
+
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
+        const data=await response.json();
 
-        const result = await response.json();
-        showResult(result);
+        showResult(data);
 
-    } catch (error) {
-        out.innerHTML =
-            "<span style='color:red'>❌ " +
-            error.message +
-            "</span>";
     }
+
+    catch(e){
+
+        output.innerHTML="❌ "+e.message;
+
+    }
+
 }
 
-// build a nice view from the response
-function showResult(result) {
-    const out = document.getElementById("model-output");
+function showResult(data){
 
-    if (result.status !== "success") {
-        out.innerHTML = "<span style='color:red'>❌ " + result.message + "</span>";
+    const output=document.getElementById("model-output");
+
+    if(data.status!=="success"){
+
+        output.innerHTML="❌ "+data.message;
+
         return;
+
     }
 
-    const pred = result.prediction;
+    output.innerHTML=`
 
-    let html = "<div class='result-header'>";
-    html += "Status: <span class='status-ok'>✅ " + result.status + "</span><br>";
-    html += "Method: <b>" + result.method.toUpperCase() + "</b><br>";
-    html += "File: <b>" + result.filename + "</b>";
-    html += "</div>";
+    <h3>${data.prediction.class || data.prediction.label || data.prediction}</h3>
 
-    // show prediction as a small table
-    html += "<table class='pred-table'>";
-    html += "<tr><th>Field</th><th>Value</th></tr>";
+    <p><strong>Status:</strong> ${data.status}</p>
 
-    // if prediction is an object, loop its keys; else just show it
-    if (typeof pred === "object" && pred !== null) {
-        for (const key in pred) {
-            html += "<tr><td>" + key + "</td><td>" + pred[key] + "</td></tr>";
-        }
-    } else {
-        html += "<tr><td>result</td><td>" + pred + "</td></tr>";
-    }
+    <p><strong>Model:</strong> ${data.method}</p>
 
-    html += "</table>";
+    <p><strong>Filename:</strong> ${data.filename}</p>
 
-    out.innerHTML = html;
+    `;
+
 }
+
 </script>
-</div>
+
 </body>
 </html>

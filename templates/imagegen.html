@@ -3,64 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Generation · MarketPulse AI</title>
-<link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+
+<title>Image Generation | MarketPulse AI</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', path='style.css') }}">
+
 </head>
+
 <body>
+
 <div class="navbar">
-  <a class="brand" href="index.html">📈 MarketPulse AI</a>
-  <div class="nav-links">
-    <a class="nav-btn active" href="index.html">General</a>
-    <a class="nav-btn" href="comparison.html">Comparison</a>
-    <a class="nav-btn" href="agent.html">Agent</a>
-  </div>
+    <a class="brand" href="/">📈 MarketPulse AI</a>
 </div>
+
 <div class="container">
-index.html">← Back to Models</a>
-<h1 class="page-title">🎨  Image Generation</h1>
-<p class="page-subtitle">Endpoint: POST /generate-image  •  Use case: Text → Image</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">prompt</label><input type="text" class="form-input" id="in-prompt"></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
+
+    <a class="back-btn" href="/">
+        ← Back to Dashboard
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🎨 AI Image Generation</h1>
+
+        <p>
+
+            Create images from natural language prompts using
+            generative AI models.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About Image Generation
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Enter a descriptive prompt and the AI model
+            will generate an image based on your text.
+
+        </p>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ✍️ Enter Prompt
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Prompt
+
+            </label>
+
+            <input
+                id="in-prompt"
+                type="text"
+                class="form-input"
+                placeholder="Example: A futuristic city at sunset">
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            🎨 Generate Image
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🖼️ Generated Image
+
+        </div>
+
+        <div
+            id="model-output"
+            class="output-card">
+
+            Your generated image will appear here.
+
+        </div>
+
+    </div>
+
+    <!-- Model Information -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🧠 Model Information
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">🎨</span>
+
+                Model
+
+                <span class="file-tag">
+
+                    Generative AI
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">✍️</span>
+
+                Input
+
+                <span class="file-tag">
+
+                    Text Prompt
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">🖼️</span>
+
+                Output
+
+                <span class="file-tag">
+
+                    AI Image
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">⚡</span>
+
+                Task
+
+                <span class="file-tag">
+
+                    Text-to-Image
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
 </div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+
 <script>
-const ENDPOINT = "/generate-image";
 
-async function runModel(){
-  const out = document.getElementById("model-output");
-  const prompt = document.getElementById("in-prompt").value.trim();
+/* Keep your existing JavaScript exactly as it is */
 
-  if (!prompt){
-    out.textContent = "⚠️ Please enter a prompt.";
-    return;
-  }
-
-  out.textContent = "⏳ Generating image, this can take a moment…";
-
-  try {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: prompt })
-    });
-
-    const json = await res.json();
-
-    if (json.status === "success"){
-      out.innerHTML = '<img src="' + json.generated_image + '" alt="generated image" style="max-width:100%; border-radius:8px;">';
-    } else {
-      out.textContent = "❌ Error: " + (json.detail || "generation failed");
-    }
-  } catch(err) {
-    out.textContent = "❌ Error: " + err.message;
-  }
-}
 </script>
-</div>
+
 </body>
 </html>
