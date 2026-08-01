@@ -2,360 +2,195 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>LangGraph Agent | MarketPulse AI</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <title>LangGraph · MarketPulse AI</title>
 
+    <link rel="stylesheet"  href="{{ url_for('static', path='style.css') }}">
 </head>
 
 <body>
 
-<div class="navbar">
+    <div class="navbar">
 
-    <a class="brand" href="/">
-        📈 MarketPulse AI
-    </a>
+        <a class="brand" href="/">
+            📈 MarketPulse AI
+        </a>
 
-</div>
-
-<div class="container">
-
-    <a class="back-btn" href="/">
-        ← Back to Dashboard
-    </a>
-
-    <!-- Hero -->
-
-    <div class="hero">
-
-        <h1>🕸️ LangGraph Agent</h1>
-
-        <p>
-
-            Chat with a LangGraph-powered AI assistant that maintains
-            conversation state and executes multi-step workflows for
-            complex reasoning tasks.
-
-        </p>
+        
 
     </div>
 
-    <!-- About -->
 
-    <div class="card">
+    <div class="container">
 
-        <div class="section-title">
+       
 
-            ℹ️ About LangGraph
-
-        </div>
+        <h1 class="page-title">
+            🕸️ LangGraph
+        </h1>
 
         <p class="page-subtitle">
-
-            LangGraph extends Large Language Models by representing
-            conversations as graphs, enabling state management,
-            workflow execution, and intelligent decision making.
-
+            Endpoint: POST /chatbot-response • Stateful multi-step LangGraph agent
         </p>
 
-    </div>
-
-    <!-- Features -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            🚀 Capabilities
-
-        </div>
-
-        <ul class="artifact-list">
-
-            <li>
-                <span class="file-icon">🧠</span>
-                Stateful Conversations
-                <span class="file-tag">Memory</span>
-            </li>
-
-            <li>
-                <span class="file-icon">⚙️</span>
-                Multi-Step Workflow
-                <span class="file-tag">Graph</span>
-            </li>
-
-            <li>
-                <span class="file-icon">💬</span>
-                AI Chat
-                <span class="file-tag">LLM</span>
-            </li>
-
-            <li>
-                <span class="file-icon">🔄</span>
-                Context Tracking
-                <span class="file-tag">Agent</span>
-            </li>
-
-        </ul>
-
-    </div>
-
-    <!-- Chat -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            💬 Chat Interface
-
-        </div>
 
         <div class="chat-window" id="chat-window">
 
             <div class="chat-bubble bot-msg">
-
-                🕸️ LangGraph Agent is ready.
-                Ask your question!
-
+                🕸️ LangGraph ready. Ask me anything 🚀
             </div>
 
         </div>
+
 
         <div class="chat-input-row">
 
             <input
                 type="text"
                 id="chat-input"
-                placeholder="Ask something..."
-                autocomplete="off">
+                placeholder="Type your message..."
+                autocomplete="off"
+            >
 
             <button
-                id="send-button"
                 type="button"
-                onclick="sendChat()">
-
+                id="send-button"
+                onclick="sendChat()"
+            >
                 Send
-
             </button>
 
         </div>
 
     </div>
 
-    <!-- Example Prompts -->
 
-    <div class="card">
+    <script>
+        const ENDPOINT = "/chatbot-response";
+        const history = [];
 
-        <div class="section-title">
+        const chatInput = document.getElementById("chat-input");
+        const sendButton = document.getElementById("send-button");
 
-            💡 Example Questions
 
-        </div>
-
-        <ul class="artifact-list">
-
-            <li>
-                Explain LangGraph in simple terms.
-            </li>
-
-            <li>
-                How does graph-based AI work?
-            </li>
-
-            <li>
-                Compare LangGraph and LangChain.
-            </li>
-
-            <li>
-                Plan a multi-agent workflow.
-            </li>
-
-        </ul>
-
-    </div>
-
-</div>
-
-<script>
-
-const ENDPOINT = "/chatbot-response";
-const history = [];
-
-const chatInput = document.getElementById("chat-input");
-const sendButton = document.getElementById("send-button");
-
-chatInput.addEventListener("keydown",function(event){
-
-    if(event.key==="Enter"){
-
-        sendChat();
-
-    }
-
-});
-
-function render(){
-
-    const chatWindow=document.getElementById("chat-window");
-
-    if(history.length===0){
-
-        chatWindow.innerHTML=`
-        <div class="chat-bubble bot-msg">
-            🕸️ LangGraph Agent is ready. Ask your question!
-        </div>`;
-
-    }else{
-
-        chatWindow.innerHTML="";
-
-        history.forEach(function(item){
-
-            const bubble=document.createElement("div");
-
-            bubble.className=
-            "chat-bubble "+item.role+"-msg";
-
-            bubble.textContent=item.text;
-
-            chatWindow.appendChild(bubble);
-
+        chatInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendChat();
+            }
         });
 
-    }
 
-    chatWindow.scrollTop=chatWindow.scrollHeight;
+        function render() {
+            const chatWindow = document.getElementById("chat-window");
 
-}
+            if (history.length === 0) {
+                chatWindow.innerHTML =
+                    '<div class="chat-bubble bot-msg">' +
+                    '🕸️ LangGraph ready. Ask me anything 🚀' +
+                    '</div>';
+            } else {
+                chatWindow.innerHTML = "";
 
-async function sendChat(){
+                history.forEach(function(item) {
+                    const bubble = document.createElement("div");
 
-    const message=chatInput.value.trim();
+                    bubble.className =
+                        "chat-bubble " + item.role + "-msg";
 
-    if(!message){
+                    bubble.textContent = item.text;
 
-        return;
+                    chatWindow.appendChild(bubble);
+                });
+            }
 
-    }
-
-    history.push({
-
-        role:"user",
-
-        text:message
-
-    });
-
-    render();
-
-    chatInput.value="";
-
-    chatInput.disabled=true;
-
-    sendButton.disabled=true;
-
-    sendButton.textContent="Thinking...";
-
-    try{
-
-        const response=await fetch(ENDPOINT,{
-
-            method:"POST",
-
-            headers:{
-
-                "Content-Type":"application/json"
-
-            },
-
-            body:JSON.stringify({
-
-                question:message
-
-            })
-
-        });
-
-        const data=await response.json();
-
-        if(!response.ok){
-
-            throw new Error(
-
-                data.detail ||
-
-                "Unable to get response"
-
-            );
-
+            chatWindow.scrollTop = chatWindow.scrollHeight;
         }
 
-        let reply=data.answer||
 
-        "No answer received.";
+        async function sendChat() {
+            const message = chatInput.value.trim();
 
-        if(data.approved!==undefined){
+            if (!message) {
+                return;
+            }
 
-            reply+="\n\nApproved: "+
-
-            (data.approved?"Yes":"No");
-
-        }
-
-        if(data.issues&&data.issues.length>0){
-
-            reply+="\n\nIssues Found:";
-
-            data.issues.forEach(function(issue){
-
-                reply+="\n- "+issue;
-
+            history.push({
+                role: "user",
+                text: message
             });
 
+            render();
+
+            chatInput.value = "";
+            chatInput.disabled = true;
+            sendButton.disabled = true;
+            sendButton.textContent = "Thinking...";
+
+            try {
+                const response = await fetch(ENDPOINT, {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        question: message
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(
+                        data.detail || "Unable to get response"
+                    );
+                }
+
+                let reply = data.answer || "No answer received.";
+
+                if (data.approved !== undefined) {
+                    reply += "\n\nApproved: " +
+                        (data.approved ? "Yes" : "No");
+                }
+
+                if (data.issues && data.issues.length > 0) {
+                    reply += "\n\nIssues Found:";
+
+                    data.issues.forEach(function(issue) {
+                        reply += "\n- " + issue;
+                    });
+                }
+
+                history.push({
+                    role: "bot",
+                    text: reply
+                });
+
+            } catch (error) {
+                history.push({
+                    role: "bot",
+                    text: "Error: " + error.message
+                });
+
+            } finally {
+                render();
+
+                chatInput.disabled = false;
+                sendButton.disabled = false;
+                sendButton.textContent = "Send";
+
+                chatInput.focus();
+            }
         }
-
-        history.push({
-
-            role:"bot",
-
-            text:reply
-
-        });
-
-    }
-
-    catch(error){
-
-        history.push({
-
-            role:"bot",
-
-            text:"❌ Error: "+error.message
-
-        });
-
-    }
-
-    finally{
-
-        render();
-
-        chatInput.disabled=false;
-
-        sendButton.disabled=false;
-
-        sendButton.textContent="Send";
-
-        chatInput.focus();
-
-    }
-
-}
-
-</script>
+    </script>
 
 </body>
+
 </html>

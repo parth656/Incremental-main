@@ -3,260 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>LangGraph Agent | MarketPulse AI</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', path='style.css') }}">
-
+<title>LangGraph · MarketPulse AI</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
 <div class="navbar">
-    <a class="brand" href="/">📈 MarketPulse AI</a>
+  <a class="brand" href="index.html">📈 MarketPulse AI</a>
+  
 </div>
-
 <div class="container">
+<a class="back-btn" href="agent.html">← Back to Agents</a>
+<h1 class="page-title">🕸️  LangGraph</h1>
+<p class="page-subtitle">Endpoint: POST /langgraph-agent  •  Stateful multi-step LangGraph agent</p>
 
-    <a class="back-btn" href="/">
-        ← Back to Dashboard
-    </a>
-
-    <!-- Hero -->
-
-    <div class="hero">
-
-        <h1>🧠 LangGraph Agent</h1>
-
-        <p>
-
-            Interact with a stateful AI agent powered by LangGraph.
-            The agent manages multi-step reasoning and maintains
-            conversation flow across complex tasks.
-
-        </p>
-
-    </div>
-
-    <!-- About -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            ℹ️ About LangGraph
-
-        </div>
-
-        <p class="page-subtitle">
-
-            LangGraph enables graph-based AI workflows where
-            each node performs a specific task while maintaining
-            conversation state and execution history.
-
-        </p>
-
-    </div>
-
-    <!-- Capabilities -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            🚀 Capabilities
-
-        </div>
-
-        <ul class="artifact-list">
-
-            <li>
-                <span class="file-icon">🧠</span>
-                Multi-Step Reasoning
-                <span class="file-tag">Graph</span>
-            </li>
-
-            <li>
-                <span class="file-icon">💬</span>
-                Stateful Conversations
-                <span class="file-tag">Memory</span>
-            </li>
-
-            <li>
-                <span class="file-icon">⚙️</span>
-                Workflow Execution
-                <span class="file-tag">Flow</span>
-            </li>
-
-            <li>
-                <span class="file-icon">🤖</span>
-                AI Decision Making
-                <span class="file-tag">Agent</span>
-            </li>
-
-        </ul>
-
-    </div>
-
-    <!-- Chat -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            💬 Chat Interface
-
-        </div>
-
-        <div
-            class="chat-window"
-            id="chat-window">
-
-            <div class="chat-bubble bot-msg">
-
-                🧠 LangGraph Agent is ready. Ask your question!
-
-            </div>
-
-        </div>
-
-        <div class="chat-input-row">
-
-            <input
-                type="text"
-                id="chat-input"
-                placeholder="Type your message..."
-                onkeydown="if(event.key==='Enter')sendChat()">
-
-            <button onclick="sendChat()">
-
-                Send
-
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- Example Prompts -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            💡 Example Prompts
-
-        </div>
-
-        <ul class="artifact-list">
-
-            <li>
-                Explain how LangGraph works.
-            </li>
-
-            <li>
-                Solve a multi-step reasoning problem.
-            </li>
-
-            <li>
-                Plan an AI workflow.
-            </li>
-
-            <li>
-                Explain the difference between LangChain and LangGraph.
-            </li>
-
-        </ul>
-
-    </div>
-
+<div class="chat-window" id="chat-window">
+  <div class="chat-bubble bot-msg">🕸️ LangGraph ready. Ask me anything 🚀</div>
+</div>
+<div class="chat-input-row">
+  <input type="text" id="chat-input" placeholder="Type your message…" onkeydown="if(event.key==='Enter')sendChat()">
+  <button onclick="sendChat()">Send</button>
 </div>
 
 <script>
-
 const ENDPOINT = "/langgraph-agent";
 const AGENT_NAME = "LangGraph";
 const history = [];
 
 function render(){
-
-    const win=document.getElementById("chat-window");
-
-    if(history.length===0){
-
-        win.innerHTML=`
-        <div class="chat-bubble bot-msg">
-            🧠 LangGraph Agent is ready. Ask your question!
-        </div>`;
-
-    }else{
-
-        win.innerHTML=history
-        .map(h=>`<div class="chat-bubble ${h.role}-msg">${h.text}</div>`)
-        .join("");
-
-    }
-
-    win.scrollTop=win.scrollHeight;
-
+  const win = document.getElementById("chat-window");
+  if(history.length === 0){
+    win.innerHTML = `<div class="chat-bubble bot-msg">🕸️ LangGraph ready. Ask me anything 🚀</div>`;
+  } else {
+    win.innerHTML = history.map(h=>`<div class="chat-bubble ${h.role}-msg">${h.text}</div>`).join("");
+  }
+  win.scrollTop = win.scrollHeight;
 }
 
 async function sendChat(){
-
-    const input=document.getElementById("chat-input");
-
-    const msg=input.value.trim();
-
-    if(!msg) return;
-
-    history.push({
-        role:"user",
-        text:msg
-    });
-
+  const input = document.getElementById("chat-input");
+  const msg = input.value.trim();
+  if(!msg) return;
+  history.push({role:"user", text:msg});
+  render();
+  input.value = "";
+  /* ---- REAL BACKEND CALL ----
+  const res = await fetch(ENDPOINT, {method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({message:msg})});
+  const json = await res.json();
+  const reply = json.answer || json.response;
+  ---------------------------- */
+  setTimeout(()=>{
+    const reply = `🕸️ (${AGENT_NAME} demo) You said: "${msg}". Connect ${ENDPOINT} for real answers.`;
+    history.push({role:"bot", text:reply});
     render();
-
-    input.value="";
-
-    /*
-    const res=await fetch(ENDPOINT,{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            message:msg
-        })
-    });
-
-    const json=await res.json();
-
-    const reply=
-        json.answer||
-        json.response;
-    */
-
-    setTimeout(()=>{
-
-        const reply=
-        `🧠 (${AGENT_NAME}) ${msg}`;
-
-        history.push({
-
-            role:"bot",
-
-            text:reply
-
-        });
-
-        render();
-
-    },400);
-
+  }, 400);
 }
-
 </script>
-
+</div>
 </body>
 </html>

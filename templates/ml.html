@@ -1,486 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Customer Churn Prediction | MarketPulse AI</title>
-
+<title>ML Model - Customer Churn Prediction</title>
 <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
-
 </head>
-
 <body>
-
 <div class="navbar">
-
-    <a class="brand" href="/">
-        📈 MarketPulse AI
-    </a>
-
+    <a class="brand" href="index.html">📈 MarketPulse AI</a>
+    <div class="nav-links">
+        <a class="nav-btn active" href="index.html">General</a>
+        <a class="nav-btn" href="comparison.html">Comparison</a>
+        <a class="nav-btn" href="agent.html">Agent</a>
+    </div>
 </div>
-
 <div class="container">
+    <a class="back-btn" href="index.html">← Back to Models</a>
+    <h1 class="page-title">📊 Customer Churn Prediction</h1>
+    <p class="page-subtitle">Endpoint: POST /predict-ml • Use Case: Customer Churn Prediction</p>
 
-    <a class="back-btn" href="/">
-        ← Back to Dashboard
-    </a>
-
-    <!-- Hero -->
-
-    <div class="hero">
-
-        <h1>📊 Customer Churn Prediction</h1>
-
-        <p>
-
-            Predict customer churn using classical Machine Learning
-            algorithms including Support Vector Machine, Decision Tree,
-            and Random Forest.
-
-        </p>
-
-    </div>
-
-    <!-- About -->
-
+    <!-- INPUT -->
     <div class="card">
-
-        <div class="section-title">
-
-            ℹ️ About This Model
-
-        </div>
-
-        <p class="page-subtitle">
-
-            Enter customer information below to estimate whether
-            a customer is likely to leave the organization.
-
-        </p>
-
-    </div>
-
-    <!-- Input -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            📝 Customer Information
-
-        </div>
-
+        <div class="section-title">Input</div>
         <div class="form-group">
-
-            <label class="form-label">
-
-                Credit Score
-
-            </label>
-
-            <input
-                id="creditScore"
-                class="form-input"
-                type="number"
-                placeholder="Enter Credit Score">
-
+            <label class="form-label">Credit Score</label>
+            <input type="number" class="form-input" id="creditScore">
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Geography
-
-            </label>
-
-            <select
-                id="geography"
-                class="form-input">
-
+            <label class="form-label">Geography</label>
+            <select class="form-input" id="geography">
                 <option>France</option>
                 <option>Germany</option>
                 <option>Spain</option>
-
             </select>
-
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Gender
-
-            </label>
-
-            <select
-                id="gender"
-                class="form-input">
-
+            <label class="form-label">Gender</label>
+            <select class="form-input" id="gender">
                 <option>Male</option>
                 <option>Female</option>
-
             </select>
-
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Age
-
-            </label>
-
-            <input
-                id="age"
-                class="form-input"
-                type="number"
-                placeholder="Enter Age">
-
+            <label class="form-label">Age</label>
+            <input type="number" class="form-input" id="age">
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Tenure
-
-            </label>
-
-            <input
-                id="tenure"
-                class="form-input"
-                type="number"
-                placeholder="Enter Tenure">
-
+            <label class="form-label">Tenure</label>
+            <input type="number" class="form-input" id="tenure">
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Balance
-
-            </label>
-
-            <input
-                id="balance"
-                class="form-input"
-                type="number"
-                placeholder="Enter Balance">
-
+            <label class="form-label">Balance</label>
+            <input type="number" class="form-input" id="balance">
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Number of Products
-
-            </label>
-
-            <input
-                id="numProducts"
-                class="form-input"
-                type="number"
-                placeholder="Enter Number of Products">
-
+            <label class="form-label">Number Of Products</label>
+            <input type="number" class="form-input" id="numProducts">
         </div>
-                <div class="form-group">
-
-            <label class="form-label">
-
-                Has Credit Card
-
-            </label>
-
-            <select
-                id="hasCrCard"
-                class="form-input">
-
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-
+        <div class="form-group">
+            <label class="form-label">Has Credit Card</label>
+            <select class="form-input" id="hasCrCard">
+                <option value="1">1</option>
+                <option value="0">0</option>
             </select>
-
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Active Member
-
-            </label>
-
-            <select
-                id="isActiveMember"
-                class="form-input">
-
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-
+            <label class="form-label">Is Active Member</label>
+            <select class="form-input" id="isActiveMember">
+                <option value="1">1</option>
+                <option value="0">0</option>
             </select>
-
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Estimated Salary
-
-            </label>
-
-            <input
-                id="estimatedSalary"
-                class="form-input"
-                type="number"
-                placeholder="Enter Estimated Salary">
-
+            <label class="form-label">Estimated Salary</label>
+            <input type="number" class="form-input" id="estimatedSalary">
         </div>
-
         <div class="form-group">
-
-            <label class="form-label">
-
-                Machine Learning Model
-
-            </label>
-
-            <select
-                id="model"
-                class="form-input">
-
+            <label class="form-label">Model</label>
+            <select class="form-input" id="model">
                 <option>SVM</option>
                 <option>Decision Tree</option>
                 <option>Random Forest</option>
-
             </select>
-
         </div>
-
-        <button
-            class="submit-btn"
-            onclick="runModel()">
-
-            📊 Predict Churn
-
-        </button>
-
+        <button class="submit-btn" onclick="runModel()">Predict Churn</button>
     </div>
 
-    <!-- Output -->
-
+    <!-- OUTPUT -->
     <div class="card">
-
-        <div class="section-title">
-
-            📊 Prediction Result
-
-        </div>
-
-        <div
-            id="model-output"
-            class="output-card">
-
-            Prediction results will appear here after
-            running the selected model.
-
-        </div>
-
+        <div class="section-title">Output</div>
+        <div class="output-card" id="model-output">Prediction result will appear here...</div>
     </div>
-
-    <!-- Available Models -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            🧠 Available Models
-
-        </div>
-
-        <ul class="artifact-list">
-
-            <li>
-
-                <span class="file-icon">📈</span>
-
-                Support Vector Machine
-
-                <span class="file-tag">
-
-                    SVM
-
-                </span>
-
-            </li>
-
-            <li>
-
-                <span class="file-icon">🌳</span>
-
-                Decision Tree
-
-                <span class="file-tag">
-
-                    Tree
-
-                </span>
-
-            </li>
-
-            <li>
-
-                <span class="file-icon">🌲</span>
-
-                Random Forest
-
-                <span class="file-tag">
-
-                    Forest
-
-                </span>
-
-            </li>
-
-        </ul>
-
-    </div>
-
 </div>
-
 <script>
-
 const ENDPOINT = "/predict-ml";
 
 async function runModel() {
+    const output = document.getElementById("model-output");
 
-    const output =
-        document.getElementById("model-output");
-
+    // 1. collect data from the form
     const data = {
-
-        CreditScore:
-        Number(document.getElementById("creditScore").value),
-
-        Geography:
-        document.getElementById("geography").value,
-
-        Gender:
-        document.getElementById("gender").value,
-
-        Age:
-        Number(document.getElementById("age").value),
-
-        Tenure:
-        Number(document.getElementById("tenure").value),
-
-        Balance:
-        Number(document.getElementById("balance").value),
-
-        NumOfProducts:
-        Number(document.getElementById("numProducts").value),
-
-        HasCrCard:
-        Number(document.getElementById("hasCrCard").value),
-
-        IsActiveMember:
-        Number(document.getElementById("isActiveMember").value),
-
-        EstimatedSalary:
-        Number(document.getElementById("estimatedSalary").value),
-
-        Model:
-        document.getElementById("model").value
-
+        CreditScore: Number(document.getElementById("creditScore").value),
+        Geography: document.getElementById("geography").value,
+        Gender: document.getElementById("gender").value,
+        Age: Number(document.getElementById("age").value),
+        Tenure: Number(document.getElementById("tenure").value),
+        Balance: Number(document.getElementById("balance").value),
+        NumOfProducts: Number(document.getElementById("numProducts").value),
+        HasCrCard: Number(document.getElementById("hasCrCard").value),
+        IsActiveMember: Number(document.getElementById("isActiveMember").value),
+        EstimatedSalary: Number(document.getElementById("estimatedSalary").value),
+        Model: document.getElementById("model").value
     };
 
     output.innerHTML = "⏳ Processing...";
 
+    // 2. send data to backend and get result
     try {
+        const response = await fetch(ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
 
-        const response = await fetch(
-            ENDPOINT,
-            {
+        const result = await response.json();
 
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                    "application/json"
-                },
-
-                body: JSON.stringify(data)
-
-            });
-
-        const result =
-            await response.json();
-                    output.innerHTML = `
-
-        <div class="result-header">
-
-            <strong>
-                ✅ Prediction Completed
-            </strong>
-
-        </div>
-
-        <table class="pred-table">
-
-            <tr>
-
-                <th>Field</th>
-
-                <th>Value</th>
-
-            </tr>
-
-            <tr>
-
-                <td>Selected Model</td>
-
-                <td>${result.model}</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Prediction</td>
-
-                <td>${result.prediction}</td>
-
-            </tr>
-
-        </table>
-
-        `;
-
-    }
-
-    catch(error){
-
+        // 3. show result in output card
         output.innerHTML =
+            `<strong>Selected Model:</strong> ${result.model}<br><br>` +
+            `<strong>Prediction:</strong> ${result.prediction}`;
 
-        `<span style="color:red">
-
-            ❌ ${error.message}
-
-        </span>`;
-
+    } catch (error) {
+        output.innerHTML = `❌ Error: ${error.message}`;
     }
-
 }
-
 </script>
-
 </body>
-
 </html>

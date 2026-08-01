@@ -3,163 +3,147 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Chatbot | MarketPulse AI</title>
-
-<link rel="stylesheet"
-href="{{ url_for('static', path='style.css') }}">
-
+<title>Chatbot · MarketPulse AI</title>
+<link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
 </head>
-
 <body>
-
 <div class="navbar">
-    <a class="brand" href="/">📈 MarketPulse AI</a>
+  <a class="brand" href="index.html">📈 MarketPulse AI</a>
+  
 </div>
-
 <div class="container">
+<a class="back-btn" href="agent.html">← Back to Agents</a>
+<h1 class="page-title">🤖  Chatbot</h1>
+<p class="page-subtitle">Endpoint: POST /chatbot  •  RAG-based document Q&A chatbot</p>
 
-    <a class="back-btn" href="/agent">
-        ← Back to Agents
-    </a>
-
-    <!-- Hero -->
-
-    <div class="hero">
-
-        <h1>🤖 AI Chatbot</h1>
-
-        <p>
-
-            Ask questions and receive intelligent responses from the
-            AI assistant powered by Retrieval-Augmented Generation (RAG).
-
-        </p>
-
-    </div>
-
-    <!-- About -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            ℹ️ About Chatbot
-
-        </div>
-
-        <p class="page-subtitle">
-
-            This chatbot searches the knowledge base and generates
-            contextual responses to your questions.
-
-        </p>
-
-    </div>
-
-    <!-- Chat -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            💬 Chat
-
-        </div>
-
-        <div
-            class="chat-window"
-            id="chat-window">
-
-            <div class="chat-bubble bot-msg">
-
-                🤖 Chatbot ready. Ask me anything!
-
-            </div>
-
-        </div>
-
-        <div class="chat-input-row">
-
-            <input
-                type="text"
-                id="chat-input"
-                placeholder="Type your message..."
-                onkeydown="if(event.key==='Enter')sendChat()">
-
-            <button
-                onclick="sendChat()">
-
-                Send
-
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- Capabilities -->
-
-    <div class="card">
-
-        <div class="section-title">
-
-            ✨ Capabilities
-
-        </div>
-
-        <ul class="artifact-list">
-
-            <li>
-
-                <span class="file-icon">📚</span>
-
-                Knowledge Base Search
-
-                <span class="file-tag">RAG</span>
-
-            </li>
-
-            <li>
-
-                <span class="file-icon">🤖</span>
-
-                AI Conversation
-
-                <span class="file-tag">LLM</span>
-
-            </li>
-
-            <li>
-
-                <span class="file-icon">💬</span>
-
-                Context-Aware Responses
-
-                <span class="file-tag">Chat</span>
-
-            </li>
-
-            <li>
-
-                <span class="file-icon">⚡</span>
-
-                Real-Time Answers
-
-                <span class="file-tag">Fast</span>
-
-            </li>
-
-        </ul>
-
-    </div>
-
+<div class="chat-window" id="chat-window">
+  <div class="chat-bubble bot-msg">🤖 Chatbot ready. Ask me anything 🚀</div>
+</div>
+<div class="chat-input-row">
+  <input type="text" id="chat-input" placeholder="Type your message…" onkeydown="if(event.key==='Enter')sendChat()">
+  <button onclick="sendChat()">Send</button>
 </div>
 
 <script>
+const ENDPOINT = "/chatbot";
+const history = [];
 
-/* Keep your existing JavaScript exactly as it is */
+function render() {
+  const win = document.getElementById("chat-window");
 
+  if (history.length === 0) {
+    win.innerHTML = `
+      <div class="chat-bubble bot-msg">
+        🤖 Chatbot ready. Ask me anything 🚀
+      </div>
+    `;
+  } else {
+    win.innerHTML = "";
+
+    history.forEach(item => {
+      const bubble = document.createElement("div");
+
+      bubble.className =
+        "chat-bubble " + item.role + "-msg";
+
+      bubble.textContent = item.text;
+
+      win.appendChild(bubble);
+    });
+  }
+
+  win.scrollTop = win.scrollHeight;
+}
+
+
+async function sendChat() {
+  const input = document.getElementById("chat-input");
+  const message = input.value.trim();
+
+  if (!message) {
+    return;
+  }
+
+  history.push({
+    role: "user",
+    text: message
+  });
+
+  input.value = "";
+  input.disabled = true;
+
+  render();
+
+  history.push({
+    role: "bot",
+    text: "🤖 Thinking..."
+  });
+
+  render();
+
+  try {
+    const response = await fetch(ENDPOINT, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        message: message
+      })
+    });
+
+    const result = await response.json();
+
+    // Remove the temporary "Thinking..." message
+    history.pop();
+
+    if (!response.ok) {
+      throw new Error(
+        result.detail ||
+        result.message ||
+        "Chatbot request failed."
+      );
+    }
+
+    if (!result.answer) {
+      throw new Error(
+        "The chatbot returned an empty answer."
+      );
+    }
+
+    history.push({
+      role: "bot",
+      text: "🤖 " + result.answer
+    });
+
+  } catch (error) {
+    console.error("Chatbot error:", error);
+
+    // Remove "Thinking..." if it still exists
+    const lastMessage = history[history.length - 1];
+
+    if (
+      lastMessage &&
+      lastMessage.role === "bot" &&
+      lastMessage.text === "🤖 Thinking..."
+    ) {
+      history.pop();
+    }
+
+    history.push({
+      role: "bot",
+      text: "❌ Error: " + error.message
+    });
+
+  } finally {
+    input.disabled = false;
+    input.focus();
+    render();
+  }
+}
 </script>
-
+</div>
 </body>
 </html>
