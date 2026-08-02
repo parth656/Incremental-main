@@ -15,18 +15,110 @@
         <a class="nav-btn" href="agent.html">Agent</a>
     </div>
 </div>
-<div class="container">
-    <a class="back-btn" href="index.html">← Back to Models</a>
-    <h1 class="page-title">📊 Customer Churn Prediction</h1>
-    <p class="page-subtitle">Endpoint: POST /predict-ml • Use Case: Customer Churn Prediction</p>
 
-    <!-- INPUT -->
+<div class="container">
+
+    <a class="back-btn" href="index.html">
+        ← Back to Models
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>📊 Customer Churn Prediction</h1>
+
+        <p>
+
+            Predict whether a customer is likely to leave the bank
+            using Machine Learning algorithms. Compare multiple
+            models and analyze customer behavior for better
+            retention strategies.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
     <div class="card">
-        <div class="section-title">Input</div>
+
+        <div class="section-title">
+
+            ℹ️ About This Model
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Customer Churn Prediction identifies customers who are
+            likely to discontinue using a service. By analyzing
+            customer demographics, financial information, and
+            account activity, businesses can take proactive
+            measures to improve customer retention.
+
+        </p>
+
+    </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Prediction Workflow
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+                <span class="icon">📝</span>
+                Enter Customer Data
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">⚙️</span>
+                Feature Processing
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🧠</span>
+                ML Prediction
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">📊</span>
+                View Result
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Customer Information -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            👤 Customer Information
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Enter the customer information below to predict
+            whether the customer is likely to churn.
+
+        </p>
+
         <div class="form-group">
             <label class="form-label">Credit Score</label>
-            <input type="number" class="form-input" id="creditScore">
+            <input type="number" class="form-input" id="creditScore" placeholder="e.g. 700">
         </div>
+
         <div class="form-group">
             <label class="form-label">Geography</label>
             <select class="form-input" id="geography">
@@ -35,6 +127,7 @@
                 <option>Spain</option>
             </select>
         </div>
+
         <div class="form-group">
             <label class="form-label">Gender</label>
             <select class="form-input" id="gender">
@@ -42,58 +135,219 @@
                 <option>Female</option>
             </select>
         </div>
+
         <div class="form-group">
             <label class="form-label">Age</label>
-            <input type="number" class="form-input" id="age">
+            <input type="number" class="form-input" id="age" placeholder="e.g. 35">
         </div>
+
         <div class="form-group">
-            <label class="form-label">Tenure</label>
+            <label class="form-label">Tenure (Years)</label>
             <input type="number" class="form-input" id="tenure">
         </div>
+
         <div class="form-group">
-            <label class="form-label">Balance</label>
+            <label class="form-label">Account Balance</label>
             <input type="number" class="form-input" id="balance">
         </div>
+
         <div class="form-group">
             <label class="form-label">Number Of Products</label>
             <input type="number" class="form-input" id="numProducts">
         </div>
+
         <div class="form-group">
             <label class="form-label">Has Credit Card</label>
             <select class="form-input" id="hasCrCard">
-                <option value="1">1</option>
-                <option value="0">0</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
             </select>
         </div>
+
         <div class="form-group">
-            <label class="form-label">Is Active Member</label>
+            <label class="form-label">Active Member</label>
             <select class="form-input" id="isActiveMember">
-                <option value="1">1</option>
-                <option value="0">0</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
             </select>
         </div>
+
         <div class="form-group">
             <label class="form-label">Estimated Salary</label>
             <input type="number" class="form-input" id="estimatedSalary">
         </div>
+
         <div class="form-group">
-            <label class="form-label">Model</label>
+            <label class="form-label">Machine Learning Model</label>
             <select class="form-input" id="model">
                 <option>SVM</option>
                 <option>Decision Tree</option>
                 <option>Random Forest</option>
             </select>
         </div>
-        <button class="submit-btn" onclick="runModel()">Predict Churn</button>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            📊 Predict Customer Churn
+
+        </button>
+
     </div>
 
-    <!-- OUTPUT -->
+    <!-- Prediction -->
+
     <div class="card">
-        <div class="section-title">Output</div>
-        <div class="output-card" id="model-output">Prediction result will appear here...</div>
+
+        <div class="section-title">
+
+            📈 Prediction Result
+
+        </div>
+
+        <p class="page-subtitle">
+
+            The selected model and prediction result
+            will appear below after processing.
+
+        </p>
+
+        <div
+            class="output-card"
+            id="model-output">
+
+            Prediction result will appear here...
+
+        </div>
+
     </div>
-</div>
+
+    <!-- Algorithms -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🧠 Supported Algorithms
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+                <span class="icon">📈</span>
+                SVM
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🌳</span>
+                Decision Tree
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🌲</span>
+                Random Forest
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Technology -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Model Information
+
+        </div>
+
+        <table class="compare-table">
+
+            <tr>
+                <td>Task</td>
+                <td>Customer Churn Prediction</td>
+            </tr>
+
+            <tr>
+                <td>Category</td>
+                <td>Machine Learning</td>
+            </tr>
+
+            <tr>
+                <td>Algorithms</td>
+                <td>SVM, Decision Tree, Random Forest</td>
+            </tr>
+
+            <tr>
+                <td>Input</td>
+                <td>Customer Features</td>
+            </tr>
+
+            <tr>
+                <td>Output</td>
+                <td>Churn / No Churn</td>
+            </tr>
+
+            <tr>
+                <td>Endpoint</td>
+                <td>/predict-ml</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🎯 Business Applications
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+                <span class="icon">🏦</span>
+                Banking
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">📞</span>
+                Telecom
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🛒</span>
+                E-Commerce
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">💳</span>
+                Financial Services
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">📊</span>
+                Customer Analytics
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🎯</span>
+                Retention Strategy
+            </div>
+
+        </div>
+
+    </div>
+
 <script>
+
 const ENDPOINT = "/predict-ml";
 
 async function runModel() {

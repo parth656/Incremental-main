@@ -27,48 +27,419 @@
     </div>
 
 
-    <div class="container">
 
        
+<div class="container">
 
-        <h1 class="page-title">
-            🕸️ LangGraph
-        </h1>
+    <a class="back-btn" href="/">
+        ← Back to Dashboard
+    </a>
 
-        <p class="page-subtitle">
-            Endpoint: POST /chatbot-response • Stateful multi-step LangGraph agent
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🕸️ LangGraph AI Agent</h1>
+
+        <p>
+
+            Experience a stateful AI assistant built with LangGraph.
+            Execute complex multi-step workflows, maintain conversation
+            memory, perform intelligent reasoning, and coordinate
+            multiple AI operations seamlessly.
+
         </p>
 
+    </div>
 
-        <div class="chat-window" id="chat-window">
+    <!-- About -->
 
-            <div class="chat-bubble bot-msg">
-                🕸️ LangGraph ready. Ask me anything 🚀
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About LangGraph
+
+        </div>
+
+        <p class="page-subtitle">
+
+            LangGraph is a graph-based orchestration framework for
+            Large Language Models. It enables persistent memory,
+            branching workflows, human-in-the-loop execution,
+            and reliable state management for advanced AI agents.
+
+        </p>
+
+    </div>
+
+    <!-- Capabilities -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🚀 Agent Capabilities
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+                <span class="icon">🧠</span>
+                Stateful Memory
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🔄</span>
+                Multi-Step Reasoning
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🤖</span>
+                AI Workflow
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">📚</span>
+                Knowledge Retrieval
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">⚙️</span>
+                Graph Execution
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">⚡</span>
+                Fast Responses
             </div>
 
         </div>
 
+    </div>
+
+    <!-- Chat -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            💬 LangGraph Chat
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Ask questions, test workflows, or interact with the
+            stateful LangGraph agent. Previous conversation context
+            is maintained during execution.
+
+        </p>
+
+        <div
+            class="chat-window"
+            id="chat-window">
+
+            <div class="chat-bubble bot-msg">
+
+                🕸️ LangGraph ready. Ask me anything 🚀
+
+            </div>
+
+        </div>
 
         <div class="chat-input-row">
 
             <input
                 type="text"
                 id="chat-input"
-                placeholder="Type your message..."
-                autocomplete="off"
-            >
+                placeholder="Ask your question..."
+                autocomplete="off">
 
             <button
                 type="button"
                 id="send-button"
-                onclick="sendChat()"
-            >
+                onclick="sendChat()">
+
                 Send
+
             </button>
 
         </div>
 
     </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Execution Workflow
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">⌨️</span>
+
+                Receive Query
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🕸️</span>
+
+                Build Graph
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🧠</span>
+
+                Execute Nodes
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">💾</span>
+
+                Update Memory
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🤖</span>
+
+                Generate Answer
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">✅</span>
+
+                Return Response
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Technology -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Technology Stack
+
+        </div>
+
+        <table class="compare-table">
+
+            <tr>
+
+                <td>Framework</td>
+
+                <td>LangGraph</td>
+
+            </tr>
+
+            <tr>
+
+                <td>LLM Framework</td>
+
+                <td>LangChain</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Backend</td>
+
+                <td>FastAPI</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Communication</td>
+
+                <td>REST API</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Endpoint</td>
+
+                <td>/chatbot-response</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ✨ Key Features
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">🧠</span>
+
+                Persistent Conversation Memory
+
+                <span class="file-tag">
+
+                    Memory
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">🕸️</span>
+
+                Graph-Based Execution
+
+                <span class="file-tag">
+
+                    Workflow
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">🤖</span>
+
+                Intelligent Decision Making
+
+                <span class="file-tag">
+
+                    AI
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📊</span>
+
+                Structured Responses
+
+                <span class="file-tag">
+
+                    Output
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">⚡</span>
+
+                Real-Time Processing
+
+                <span class="file-tag">
+
+                    Speed
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🎯 Applications
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🏢</span>
+
+                Enterprise AI
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📑</span>
+
+                Document Automation
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🤝</span>
+
+                Multi-Agent Systems
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📈</span>
+
+                Business Analytics
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🔍</span>
+
+                Research Assistant
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">⚙️</span>
+
+                Workflow Automation
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 
     <script>

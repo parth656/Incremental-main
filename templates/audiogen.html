@@ -12,18 +12,267 @@
   
 </div>
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">🔊  Audio Generation</h1>
-<p class="page-subtitle">Endpoint: POST /generate-audio  •  Use case: Text → Speech / Audio</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">text</label><textarea class="form-textarea" id="in-text"></textarea></div>
-      <button class="submit-btn" onclick="runModel()">Generate</button>
+<div class="container">
+
+<a class="back-btn" href="index.html">
+    ← Back to Dashboard
+</a>
+
+<!-- Hero -->
+
+<div class="hero">
+
+    <h1>🔊 AI Audio Generation</h1>
+
+    <p>
+
+        Convert your text into natural sounding speech using
+        AI-powered Text-to-Speech technology. Enter any text,
+        generate audio instantly, and listen directly from
+        your browser.
+
+    </p>
+
 </div>
+
+<!-- About -->
+
 <div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
+
+    <div class="section-title">
+
+        ℹ️ About Audio Generation
+
+    </div>
+
+    <p class="page-subtitle">
+
+        This module transforms written text into speech using
+        an AI Text-to-Speech model. It supports quick audio
+        generation for narration, assistants, accessibility,
+        and voice-based applications.
+
+    </p>
+
 </div>
+
+<!-- Workflow -->
+
+<div class="card">
+
+    <div class="section-title">
+
+        ⚙️ Generation Workflow
+
+    </div>
+
+    <div class="models-grid">
+
+        <div class="model-btn">
+            <span class="icon">⌨️</span>
+            Enter Text
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">🤖</span>
+            AI Processing
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">🎵</span>
+            Generate Speech
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">▶️</span>
+            Play Audio
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Input -->
+
+<div class="card">
+
+    <div class="section-title">
+
+        ✍️ Input Text
+
+    </div>
+
+    <p class="page-subtitle">
+
+        Enter the text you want to convert into speech.
+
+    </p>
+
+    <div class="form-group">
+
+        <label class="form-label">
+
+            Text
+
+        </label>
+
+        <textarea
+            class="form-textarea"
+            id="in-text"
+            placeholder="Type your text here..."></textarea>
+
+    </div>
+
+    <button
+        class="submit-btn"
+        onclick="runModel()">
+
+        🔊 Generate Audio
+
+    </button>
+
+</div>
+
+<!-- Output -->
+
+<div class="card">
+
+    <div class="section-title">
+
+        🎧 Generated Audio
+
+    </div>
+
+    <p class="page-subtitle">
+
+        The generated speech, language information,
+        and downloadable audio will appear below.
+
+    </p>
+
+    <div
+        class="output-card"
+        id="model-output">
+
+        Waiting for audio generation...
+
+    </div>
+
+</div>
+
+<!-- Features -->
+
+<div class="card">
+
+    <div class="section-title">
+
+        🚀 Features
+
+    </div>
+
+    <div class="models-grid">
+
+        <div class="model-btn">
+            <span class="icon">🗣️</span>
+            Text to Speech
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">⚡</span>
+            Fast Generation
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">🎧</span>
+            Audio Preview
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">🌍</span>
+            Multi-language
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Technology -->
+
+<div class="card">
+
+    <div class="section-title">
+
+        ⚙️ Technology Stack
+
+    </div>
+
+    <table class="compare-table">
+
+        <tr>
+            <td>Task</td>
+            <td>Text-to-Speech</td>
+        </tr>
+
+        <tr>
+            <td>Input</td>
+            <td>Text</td>
+        </tr>
+
+        <tr>
+            <td>Output</td>
+            <td>Audio File</td>
+        </tr>
+
+        <tr>
+            <td>Backend</td>
+            <td>FastAPI</td>
+        </tr>
+
+        <tr>
+            <td>API</td>
+            <td>/generate-audio</td>
+        </tr>
+
+    </table>
+
+</div>
+
+<!-- Applications -->
+
+<div class="card">
+
+    <div class="section-title">
+
+        🎯 Applications
+
+    </div>
+
+    <div class="models-grid">
+
+        <div class="model-btn">
+            <span class="icon">🎙️</span>
+            Voice Assistant
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">📚</span>
+            Audiobooks
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">♿</span>
+            Accessibility
+        </div>
+
+        <div class="model-btn">
+            <span class="icon">🎬</span>
+            Narration
+        </div>
+
+    </div>
+
+</div>
+
 <script>
 const ENDPOINT = "/generate-audio";
 

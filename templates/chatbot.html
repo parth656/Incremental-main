@@ -12,17 +12,244 @@
   
 </div>
 <div class="container">
-<a class="back-btn" href="agent.html">← Back to Agents</a>
-<h1 class="page-title">🤖  Chatbot</h1>
-<p class="page-subtitle">Endpoint: POST /chatbot  •  RAG-based document Q&A chatbot</p>
+<div class="container">
 
-<div class="chat-window" id="chat-window">
-  <div class="chat-bubble bot-msg">🤖 Chatbot ready. Ask me anything 🚀</div>
-</div>
-<div class="chat-input-row">
-  <input type="text" id="chat-input" placeholder="Type your message…" onkeydown="if(event.key==='Enter')sendChat()">
-  <button onclick="sendChat()">Send</button>
-</div>
+    <a class="back-btn" href="agent.html">
+        ← Back to AI Agents
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🤖 AI Chatbot</h1>
+
+        <p>
+
+            Ask questions, retrieve information, and interact with
+            an intelligent Retrieval-Augmented Generation (RAG)
+            chatbot powered by MarketPulse AI.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About Chatbot
+
+        </div>
+
+        <p class="page-subtitle">
+
+            This AI chatbot retrieves relevant information from
+            indexed documents before generating responses,
+            providing more accurate and context-aware answers.
+
+        </p>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🚀 Capabilities
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">💬</span>
+
+                Natural Conversation
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📚</span>
+
+                Document Q&A
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🧠</span>
+
+                Context Retrieval
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">⚡</span>
+
+                Fast Responses
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Chat -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            💬 Chat Interface
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Type your question below and press Enter or click
+            Send to start chatting.
+
+        </p>
+
+        <div class="chat-window" id="chat-window">
+
+            <div class="chat-bubble bot-msg">
+
+                🤖 Chatbot ready. Ask me anything 🚀
+
+            </div>
+
+        </div>
+
+        <div class="chat-input-row">
+
+            <input
+                type="text"
+                id="chat-input"
+                placeholder="Ask your question..."
+                onkeydown="if(event.key==='Enter')sendChat()">
+
+            <button onclick="sendChat()">
+
+                Send
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ How It Works
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">⌨️</span>
+
+                Enter Query
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📄</span>
+
+                Retrieve Documents
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🤖</span>
+
+                Generate Response
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">✅</span>
+
+                Display Answer
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Technology -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Technology Stack
+
+        </div>
+
+        <table class="compare-table">
+
+            <tr>
+
+                <td>Framework</td>
+
+                <td>FastAPI</td>
+
+            </tr>
+
+            <tr>
+
+                <td>AI Model</td>
+
+                <td>RAG Chatbot</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Input</td>
+
+                <td>Natural Language</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Output</td>
+
+                <td>Context-Aware Response</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Endpoint</td>
+
+                <td>/chatbot</td>
+
+            </tr>
+
+        </table>
+
+    </div>
 
 <script>
 const ENDPOINT = "/chatbot";

@@ -21,7 +21,27 @@
 
 
 
-  <h1 class="page-title">
+  
+<div class="hero">
+<h1>🤖 Lang Agent</h1>
+<p>An intelligent AI assistant powered by MarketPulse AI. Chat, analyze images, forecast sales, perform sentiment analysis, and answer questions using one unified interface.</p>
+</div>
+<div class="card">
+<div class="section-title">ℹ️ About Lang Agent</div>
+<p class="page-subtitle">This agent combines LLM reasoning with multiple AI tools and automatically selects the appropriate capability for each request.</p>
+</div>
+<div class="card">
+<div class="section-title">🚀 Capabilities</div>
+<div class="models-grid">
+<div class="model-btn"><span class="icon">📈</span>Forecasting</div>
+<div class="model-btn"><span class="icon">😊</span>Sentiment</div>
+<div class="model-btn"><span class="icon">📷</span>Vision</div>
+<div class="model-btn"><span class="icon">📄</span>Document QA</div>
+<div class="model-btn"><span class="icon">🧠</span>Reasoning</div>
+<div class="model-btn"><span class="icon">⚡</span>Tool Calling</div>
+</div>
+</div>
+<h1 class="page-title">
     🤖 Lang Agent
   </h1>
 
@@ -844,57 +864,6 @@ render();
 </script>
 
 
-<style>
-.upload-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-  padding: 0 16px;
-
-  font-size: 20px;
-  cursor: pointer;
-
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
-
-.upload-btn:hover {
-  background: var(--border);
-}
-
-.upload-btn.disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
-}
-
-#send-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
-}
-
-#chat-input:disabled {
-  cursor: wait;
-  opacity: 0.75;
-}
-
-.chat-bubble {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.error-msg {
-  color: #b42318;
-  background: #fef3f2;
-  border: 1px solid #fecdca;
-}
-
-.thinking-msg {
-  opacity: 0.75;
-}
-</style>
 
 </body>
 </html>

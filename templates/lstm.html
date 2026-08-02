@@ -17,30 +17,384 @@
   </div>
 </div>
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">⏳  Forecast with LSTM</h1>
-<p class="page-subtitle">Endpoint: POST /forecast-lstm  •  Use case: Deep-learning forecast</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">product_id</label><input type="text" class="form-input" id="in-product_id"></div>
-      <div class="form-group"><label class="form-label">days</label><input type="number" class="form-input" id="in-days"></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
-</div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-  <canvas id="forecast-chart" style="display:none; margin-top:16px;"></canvas>
-</div>
-<div class="card">
-  <div class="section-title">📦 LSTM Artifacts</div>
-  <ul class="artifact-list">
-    <li><span class="file-icon">📄</span>lstm_model.h5<span class="file-tag">model</span></li>
-    <li><span class="file-icon">📄</span>scaler.pkl<span class="file-tag">preprocess</span></li>
-    <li><span class="file-icon">📄</span>loss_curve.png<span class="file-tag">plot</span></li>
-    <li><span class="file-icon">📄</span>forecast_plot.png<span class="file-tag">plot</span></li>
-    <li><span class="file-icon">📄</span>metrics.json<span class="file-tag">metrics</span></li>
-  </ul>
-</div>
+<div class="container">
+
+    <a class="back-btn" href="index.html">
+        ← Back to Models
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>⏳ LSTM Sales Forecasting</h1>
+
+        <p>
+
+            Forecast future product sales using a Long Short-Term Memory
+            (LSTM) deep learning model. Generate accurate predictions,
+            visualize trends, and analyze future demand with interactive
+            charts.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About LSTM Forecasting
+
+        </div>
+
+        <p class="page-subtitle">
+
+            LSTM (Long Short-Term Memory) is a recurrent neural network
+            designed for sequential and time-series data. It learns
+            historical sales patterns to forecast future values while
+            capturing long-term dependencies.
+
+        </p>
+
+    </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Forecast Workflow
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+                <span class="icon">📦</span>
+                Select Product
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">📊</span>
+                Historical Data
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">🧠</span>
+                LSTM Prediction
+            </div>
+
+            <div class="model-btn">
+                <span class="icon">📈</span>
+                Forecast Chart
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📥 Forecast Parameters
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Enter the product identifier and forecasting horizon
+            to generate future sales predictions.
+
+        </p>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Product ID
+
+            </label>
+
+            <input
+                type="text"
+                class="form-input"
+                id="in-product_id"
+                placeholder="Example: P001">
+
+        </div>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Forecast Days
+
+            </label>
+
+            <input
+                type="number"
+                class="form-input"
+                id="in-days"
+                placeholder="Example: 30">
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            📈 Generate Forecast
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📊 Forecast Result
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Product information and forecasting summary will
+            appear below.
+
+        </p>
+
+        <div
+            class="output-card"
+            id="model-output">
+
+            Forecast result will appear here…
+
+        </div>
+
+        <canvas
+            id="forecast-chart"
+            style="display:none;margin-top:20px;">
+
+        </canvas>
+
+    </div>
+
+    <!-- Model Artifacts -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📦 Model Artifacts
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                lstm_model.h5
+
+                <span class="file-tag">
+
+                    Model
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                scaler.pkl
+
+                <span class="file-tag">
+
+                    Preprocessing
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                loss_curve.png
+
+                <span class="file-tag">
+
+                    Training
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                forecast_plot.png
+
+                <span class="file-tag">
+
+                    Visualization
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                metrics.json
+
+                <span class="file-tag">
+
+                    Evaluation
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+    <!-- Technology -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Technology Stack
+
+        </div>
+
+        <table class="compare-table">
+
+            <tr>
+
+                <td>Algorithm</td>
+
+                <td>Long Short-Term Memory (LSTM)</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Category</td>
+
+                <td>Deep Learning</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Input</td>
+
+                <td>Historical Sales Data</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Output</td>
+
+                <td>Future Sales Forecast</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Endpoint</td>
+
+                <td>/forecast-lstm</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🎯 Applications
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🛒</span>
+
+                Retail Forecasting
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📦</span>
+
+                Inventory Planning
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">💰</span>
+
+                Revenue Prediction
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📈</span>
+
+                Demand Forecasting
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🏭</span>
+
+                Supply Chain
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📊</span>
+
+                Business Intelligence
+
+            </div>
+
+        </div>
+
+    </div>
+
 <script>
 const ENDPOINT = "/forecast-lstm";
 

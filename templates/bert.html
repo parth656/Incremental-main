@@ -12,18 +12,290 @@
   
 </div>
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">🔤  Sentiment (BERT)</h1>
-<p class="page-subtitle">Endpoint: POST /sentiment-bert  •  Use case: Contextual sentiment</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">text</label><textarea class="form-textarea" id="in-text"></textarea></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
-</div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+
+
+<div class="container">
+
+    <a class="back-btn" href="index.html">
+        ← Back to Models
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🔤 BERT Sentiment Analysis</h1>
+
+        <p>
+
+            Understand the emotional tone of customer reviews,
+            product feedback, comments, and social media posts
+            using a Transformer-based BERT model.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About BERT
+
+        </div>
+
+        <p class="page-subtitle">
+
+            BERT (Bidirectional Encoder Representations from
+            Transformers) is a deep learning NLP model capable
+            of understanding word context, making it highly
+            effective for sentiment analysis tasks.
+
+        </p>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ✍️ Analyze Text
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Enter the sentence, review, or paragraph you want
+            to classify.
+
+        </p>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Input Text
+
+            </label>
+
+            <textarea
+                class="form-textarea"
+                id="in-text"
+                placeholder="Example: The delivery was fast and the product quality was excellent.">
+            </textarea>
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            🔍 Predict Sentiment
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📊 Prediction Output
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Prediction results from the BERT model will appear
+            below after processing.
+
+        </p>
+
+        <div
+            class="output-card"
+            id="model-output">
+
+            Result will appear here…
+
+        </div>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🚀 Key Features
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🧠</span>
+
+                Context Aware
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">😊</span>
+
+                Sentiment Detection
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">⚡</span>
+
+                Fast Inference
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📄</span>
+
+                NLP Processing
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🎯 Common Applications
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">⭐</span>
+
+                Product Reviews
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">💬</span>
+
+                Customer Feedback
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📱</span>
+
+                Social Media
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📊</span>
+
+                Opinion Mining
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Model Summary -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📋 Model Summary
+
+        </div>
+
+        <ul class="artifact-list">
+
+            <li>
+
+                <span class="file-icon">🤖</span>
+
+                Model
+
+                <span class="file-tag">
+
+                    BERT Transformer
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">📄</span>
+
+                Input
+
+                <span class="file-tag">
+
+                    Text
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">😊</span>
+
+                Output
+
+                <span class="file-tag">
+
+                    Sentiment
+
+                </span>
+
+            </li>
+
+            <li>
+
+                <span class="file-icon">⚡</span>
+
+                Endpoint
+
+                <span class="file-tag">
+
+                    /sentiment-bert
+
+                </span>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
 <script>
 const ENDPOINT = "/sentiment-bert";
 

@@ -12,18 +12,336 @@
   
 </div>
 <div class="container">
-<a class="back-btn" href="index.html">← Back to Models</a>
-<h1 class="page-title">🎯  Object Detection</h1>
-<p class="page-subtitle">Endpoint: POST /detect-object  •  Use case: Locate objects in image</p>
-<div class="card">
-  <div class="section-title">Input</div>
-  <div class="form-group"><label class="form-label">image</label><input type="file" class="form-input" id="in-image" accept="image/*"></div>
-  <button class="submit-btn" onclick="runModel()">Predict</button>
-</div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+
+    <a class="back-btn" href="index.html">
+        ← Back to Models
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🎯 AI Object Detection</h1>
+
+        <p>
+
+            Detect and identify multiple objects within an image
+            using advanced Computer Vision and Deep Learning.
+            Upload an image to locate, classify, and count
+            every detectable object automatically.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About Object Detection
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Object Detection combines image classification and
+            object localization. The model identifies every
+            detectable object, determines its position, and
+            provides a complete count for each detected class.
+
+        </p>
+
+    </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Detection Workflow
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🖼️</span>
+
+                Upload Image
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🧠</span>
+
+                AI Detection
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📍</span>
+
+                Locate Objects
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📊</span>
+
+                View Results
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📤 Upload Image
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Select an image containing one or more objects.
+            The AI model will automatically detect and classify
+            every visible object.
+
+        </p>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Choose Image
+
+            </label>
+
+            <input
+                type="file"
+                class="form-input"
+                id="in-image"
+                accept="image/*">
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            🎯 Detect Objects
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📊 Detection Result
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Detected objects, total count, and processed image
+            will appear below.
+
+        </p>
+
+        <div
+            class="output-card"
+            id="model-output">
+
+            Detection result will appear here…
+
+        </div>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🚀 Features
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🎯</span>
+
+                Object Detection
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📍</span>
+
+                Object Localization
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📊</span>
+
+                Object Counting
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">⚡</span>
+
+                Real-Time Prediction
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Technology -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Model Information
+
+        </div>
+
+        <table class="compare-table">
+
+            <tr>
+
+                <td>Task</td>
+
+                <td>Object Detection</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Category</td>
+
+                <td>Computer Vision</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Input</td>
+
+                <td>Image</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Output</td>
+
+                <td>Detected Objects & Counts</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Endpoint</td>
+
+                <td>/detect-object</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🎯 Applications
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🚗</span>
+
+                Autonomous Driving
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🏭</span>
+
+                Manufacturing
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📹</span>
+
+                Smart Surveillance
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🏥</span>
+
+                Medical Imaging
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🛒</span>
+
+                Retail Analytics
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🚀</span>
+
+                Robotics
+
+            </div>
+
+        </div>
+
+    </div>
+
 <script>
 const ENDPOINT = "/detect-object";
 

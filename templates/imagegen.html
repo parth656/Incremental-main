@@ -12,18 +12,320 @@
   
 </div>
 <div class="container">
-index.html">← Back to Models</a>
-<h1 class="page-title">🎨  Image Generation</h1>
-<p class="page-subtitle">Endpoint: POST /generate-image  •  Use case: Text → Image</p>
-<div class="card">
-  <div class="section-title">Input</div>
-      <div class="form-group"><label class="form-label">prompt</label><input type="text" class="form-input" id="in-prompt"></div>
-      <button class="submit-btn" onclick="runModel()">Predict</button>
-</div>
-<div class="card">
-  <div class="section-title">Output</div>
-  <div class="output-card" id="model-output">Result will appear here…</div>
-</div>
+<div class="container">
+
+    <a class="back-btn" href="index.html">
+        ← Back to Models
+    </a>
+
+    <!-- Hero -->
+
+    <div class="hero">
+
+        <h1>🎨 AI Image Generation</h1>
+
+        <p>
+
+            Transform text descriptions into AI-generated images.
+            Enter a creative prompt below and let the model generate
+            a unique image based on your description.
+
+        </p>
+
+    </div>
+
+    <!-- About -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ℹ️ About Image Generation
+
+        </div>
+
+        <p class="page-subtitle">
+
+            This module uses a Text-to-Image generative AI model
+            to create images from natural language prompts.
+            Simply describe your idea and generate high-quality visuals.
+
+        </p>
+
+    </div>
+
+    <!-- Workflow -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ⚙️ Generation Workflow
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">✍️</span>
+
+                Enter Prompt
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🧠</span>
+
+                AI Processing
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🎨</span>
+
+                Generate Image
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🖼️</span>
+
+                View Result
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            ✍️ Image Prompt
+
+        </div>
+
+        <p class="page-subtitle">
+
+            Describe the image you want to generate.
+            The more descriptive your prompt, the better
+            the generated result.
+
+        </p>
+
+        <div class="form-group">
+
+            <label class="form-label">
+
+                Prompt
+
+            </label>
+
+            <input
+                type="text"
+                class="form-input"
+                id="in-prompt"
+                placeholder="Example: A futuristic smart city at sunset">
+
+        </div>
+
+        <button
+            class="submit-btn"
+            onclick="runModel()">
+
+            🎨 Generate Image
+
+        </button>
+
+    </div>
+
+    <!-- Output -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🖼️ Generated Image
+
+        </div>
+
+        <p class="page-subtitle">
+
+            The generated image will appear below once
+            the AI completes processing.
+
+        </p>
+
+        <div
+            class="output-card"
+            id="model-output">
+
+            Generated image will appear here…
+
+        </div>
+
+    </div>
+
+    <!-- Features -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🚀 Features
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🎨</span>
+
+                Text to Image
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">⚡</span>
+
+                Fast Generation
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🖼️</span>
+
+                High Quality
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">💡</span>
+
+                Creative AI
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Model Information -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            📋 Model Information
+
+        </div>
+
+        <table class="compare-table">
+
+            <tr>
+
+                <td>Task</td>
+
+                <td>Text-to-Image Generation</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Input</td>
+
+                <td>Text Prompt</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Output</td>
+
+                <td>Generated Image</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Backend</td>
+
+                <td>FastAPI</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Endpoint</td>
+
+                <td>/generate-image</td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Applications -->
+
+    <div class="card">
+
+        <div class="section-title">
+
+            🎯 Applications
+
+        </div>
+
+        <div class="models-grid">
+
+            <div class="model-btn">
+
+                <span class="icon">🎭</span>
+
+                Digital Art
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">📢</span>
+
+                Marketing
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🎮</span>
+
+                Game Design
+
+            </div>
+
+            <div class="model-btn">
+
+                <span class="icon">🏗️</span>
+
+                Concept Design
+
+            </div>
+
+        </div>
+
+    </div>
+
+
 <script>
 const ENDPOINT = "/generate-image";
 

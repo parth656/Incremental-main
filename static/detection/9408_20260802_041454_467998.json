@@ -1,0 +1,22 @@
+{
+    "image_name": "9408_20260802_041454_467998.jpg",
+    "source_image_path": "/home/kasm-user/Downloads/Incremental-main-main/static/detection/9408_20260802_041454_467998.jpg",
+    "total_objects": 1,
+    "object_counts": {
+        "short_sleeve_top": 1
+    },
+    "detections": [
+        {
+            "class": "short_sleeve_top",
+            "confidence": 0.2805,
+            "bounding_box": {
+                "x1": 0,
+                "y1": 33,
+                "x2": 55,
+                "y2": 79
+            }
+        }
+    ],
+    "annotated_image_path": "/home/kasm-user/Downloads/Incremental-main-main/static/detection/detected_9408_20260802_041454_467998.jpg",
+    "json_file_path": "/home/kasm-user/Downloads/Incremental-main-main/static/detection/9408_20260802_041454_467998.json"
+}
