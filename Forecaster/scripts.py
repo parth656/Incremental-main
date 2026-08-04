@@ -15,7 +15,7 @@ from typing import Dict, Any
 from Forecaster.src.arima import predict_sales as arima_predict
 from Forecaster.src.sarima import predict_sales as sarima_predict
 from Forecaster.src.lstm import predict_sales as lstm_predict
-from Forecaster.src.comparison import comparison 
+# from Forecaster.src.comparison import comparison 
 
 SUPPORTED_MODELS = ["arima", "sarima", "lstm"]
 
@@ -52,9 +52,7 @@ def forecast_sales(
         "data": result
     }
 
-def compare(product_id,horizon_days):
-    result=comparison(product_id,horizon_days)
-    return result
+
 
 if __name__ == "__main__":
 
@@ -67,5 +65,5 @@ if __name__ == "__main__":
     #     horizon_days=horizon_days,
     #     method=method,
     # )
-    response=compare(product_id,horizon_days)
+    response=forecast_sales(product_id,horizon_days)
     print(response)
